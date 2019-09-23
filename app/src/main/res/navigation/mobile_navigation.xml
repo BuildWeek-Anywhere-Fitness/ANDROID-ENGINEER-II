@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_classes_instructor">
+
+    <fragment
+        android:id="@+id/navigation_classes_instructor"
+        android:name="com.example.anywherefitness.ui.Instructor.InstructorClassesFragment"
+        android:label="@string/title_my_classes_instructor"
+        tools:layout="@layout/fragment_create_class_instructor" />
+
+    <fragment
+        android:id="@+id/navigation_create_class_instructor"
+        android:name="com.example.anywherefitness.ui.Instructor.CreateClassesFragment"
+        android:label="@string/title_create_class_instructor"
+        tools:layout="@layout/fragment_classes_instructor" />
+
+    <fragment
+        android:id="@+id/navigation_punchcard_instructor"
+        android:name="com.example.anywherefitness.ui.Instructor.PunchCardFragment"
+        android:label="@string/title_punchcard_isntructor"
+        tools:layout="@layout/fragment_punchcard_instructor" />
+</navigation>

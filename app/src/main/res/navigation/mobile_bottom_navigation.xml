@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/fragment_navigation_my_classes">
+
+    <fragment
+        android:id="@+id/fragment_navigation_my_classes"
+        android:name="com.example.anywherefitness.ui.client.MyClassesFragment"
+        android:label="@string/title_my_classes"
+        tools:layout="@layout/fragment_my_classes" />
+
+
+    <fragment
+        android:id="@+id/fragment_navigation_find_classes"
+        android:name="com.example.anywherefitness.ui.client.FindClassesFragment"
+        android:label="@string/title_find_classes"
+        tools:layout="@layout/fragment_find_classes" />
+</navigation>
