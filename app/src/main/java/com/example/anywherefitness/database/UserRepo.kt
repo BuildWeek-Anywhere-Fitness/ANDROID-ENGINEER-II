@@ -14,16 +14,16 @@ class UserRepo (context: Context) {
         userDao = database.userDao()
     }
 
-    fun insert(movie: FitnessClass) {
-        InsertFitnessClassAsyncTask(userDao).execute(movie)
+    fun insert(fitnessClass: FitnessClass) {
+        InsertFitnessClassAsyncTask(userDao).execute(fitnessClass)
     }
 
-    fun update(movie: FitnessClass) {
-        UpdateFitnessClassAsyncTask(userDao).execute(movie)
+    fun update(fitnessClass: FitnessClass) {
+        UpdateFitnessClassAsyncTask(userDao).execute(fitnessClass)
     }
 
-    fun delete(movie: FitnessClass) {
-        DeleteFitnessClassAsyncTask(userDao).execute(movie)
+    fun delete(fitnessClass: FitnessClass) {
+        DeleteFitnessClassAsyncTask(userDao).execute(fitnessClass)
     }
 
     fun getAllFitnessClasss(): List<FitnessClass> {
@@ -60,8 +60,8 @@ class UserRepo (context: Context) {
             val UserDao = userDao
 
             override fun doInBackground(vararg p0: FitnessClass?): List<FitnessClass> {
-                val movieList = UserDao.getAllFitnessClasses()
-                return movieList
+                val fitnessClassList = UserDao.getAllFitnessClasses()
+                return fitnessClassList
             }
 
             override fun onPostExecute(result: List<FitnessClass>?) {
