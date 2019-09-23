@@ -1,8 +1,10 @@
-package com.example.anywherefitness
+package com.example.anywherefitness.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.anywherefitness.R
+import com.example.anywherefitness.ui.Instructor.InstructorActivity
 import kotlinx.android.synthetic.main.activity_walkthrough.*
 
 class WalkthroughActivity : AppCompatActivity() {
@@ -15,7 +17,7 @@ class WalkthroughActivity : AppCompatActivity() {
         //if client set text to client walkthrough and vice versa
 
         btn_skip.setOnClickListener {
-            val intent = Intent(this, ClientActivity::class.java)
+            val intent = Intent(this, InstructorActivity::class.java)
             startActivity(intent)
         }
     }

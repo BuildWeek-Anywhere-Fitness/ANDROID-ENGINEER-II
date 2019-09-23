@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_classes_instructor"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_my_classes_instructor" />
+
+    <item
+        android:id="@+id/navigation_create_class_instructor"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_create_class_instructor" />
+
+    <item
+        android:id="@+id/navigation_punchcard_instructor"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_punchcard_isntructor" />
+
+</menu>

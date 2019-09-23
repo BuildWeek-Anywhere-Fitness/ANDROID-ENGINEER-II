@@ -1,4 +1,4 @@
-package com.example.anywherefitness.ui.home
+package com.example.anywherefitness.ui.Instructor
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.anywherefitness.R
 
-class HomeFragment : Fragment() {
+class PunchCardFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var punchCardViewModel: PunchCardViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(this, Observer {
+        punchCardViewModel =
+            ViewModelProviders.of(this).get(PunchCardViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_punchcard_instructor, container, false)
+        val textView: TextView = root.findViewById(R.id.text_notifications)
+        punchCardViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

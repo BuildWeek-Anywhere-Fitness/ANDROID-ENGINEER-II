@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_classes_instructor">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.anywherefitness.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_classes_instructor"
+        android:name="com.example.anywherefitness.ui.Instructor.InstructorClassesFragment"
+        android:label="@string/title_my_classes_instructor"
+        tools:layout="@layout/fragment_create_class_instructor" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.anywherefitness.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_create_class_instructor"
+        android:name="com.example.anywherefitness.ui.Instructor.CreateClassesFragment"
+        android:label="@string/title_create_class_instructor"
+        tools:layout="@layout/fragment_classes_instructor" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.anywherefitness.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_punchcard_instructor"
+        android:name="com.example.anywherefitness.ui.Instructor.PunchCardFragment"
+        android:label="@string/title_punchcard_isntructor"
+        tools:layout="@layout/fragment_punchcard_instructor" />
 </navigation>

@@ -1,10 +1,10 @@
-package com.example.anywherefitness.ui.home
+package com.example.anywherefitness.ui.Instructor
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class InstructorClassesViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"

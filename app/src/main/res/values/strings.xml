@@ -15,8 +15,11 @@
         corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate
         velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</string>
     <string name="title_activity_client">ClientActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_my_classes">My Classes</string>
+    <string name="title_find_classes">Find Classes</string>
+    <string name="title_activity_instructor">InstructorActivity</string>
+    <string name="title_my_classes_instructor">My Classes</string>
+    <string name="title_create_class_instructor">Create Class</string>
+    <string name="title_punchcard_isntructor">Punchcard</string>
 
 </resources>

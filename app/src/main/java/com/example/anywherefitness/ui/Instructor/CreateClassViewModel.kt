@@ -1,10 +1,10 @@
-package com.example.anywherefitness.ui.dashboard
+package com.example.anywherefitness.ui.Instructor
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class CreateClassViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
