@@ -13,3 +13,9 @@ class User (
     @PrimaryKey(autoGenerate = false)
     val id: Int = 0
 )
+
+class CreateUser(
+    val username: String,
+    val password: String,
+    val instructor: Boolean
+)
