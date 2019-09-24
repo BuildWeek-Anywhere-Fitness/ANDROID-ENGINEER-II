@@ -1,5 +1,6 @@
 package com.example.anywherefitness.Api
 
+import com.example.anywherefitness.model.CreateUser
 import com.example.anywherefitness.model.User
 import retrofit2.Call
 import retrofit2.http.Body
@@ -12,7 +13,7 @@ interface UserCrudApi {
     fun getUsers(): Call<List<User>>
 
     @POST("users/register")
-    fun addUser(@Body user: User): Call<User>
+    fun addUser(@Body user: CreateUser): Call<CreateUser>
 
     @POST("users/login")
     fun getLoginToken(@Body user: User): Call<User>
