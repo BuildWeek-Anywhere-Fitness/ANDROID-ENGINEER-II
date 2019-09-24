@@ -11,6 +11,8 @@ class FitnessClass (
     val duration: Int,
     val intensity: Int,
     val location: String,
+    val instructor_id: Int,
+    val instructor: Boolean,
     val numberOfAttendees: Int,
     val classSize: Int,
 

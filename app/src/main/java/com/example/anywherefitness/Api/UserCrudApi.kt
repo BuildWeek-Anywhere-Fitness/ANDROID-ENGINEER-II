@@ -9,8 +9,11 @@ import retrofit2.http.POST
 //username, password, id, isInstructor
 interface UserCrudApi {
     @GET("users")
-    fun getUser(): Call<List<User>>
+    fun getUsers(): Call<List<User>>
 
     @POST("users/register")
     fun addUser(@Body user: User): Call<User>
+
+    @POST("users/login")
+    fun getLoginToken(@Body user: User): Call<User>
 }

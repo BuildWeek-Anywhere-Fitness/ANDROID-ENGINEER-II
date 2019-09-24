@@ -7,10 +7,9 @@ import androidx.room.PrimaryKey
 class User (
     val username: String,
     val password: String,
-    val email: String,
-    val isInstructor: Boolean,
-    val fitnessClassList: MutableList<FitnessClass>,
+    val instructor: Boolean = false,
+    val token: String = "",
 
     @PrimaryKey(autoGenerate = false)
-    val id: Int
+    val id: Int = 0
 )

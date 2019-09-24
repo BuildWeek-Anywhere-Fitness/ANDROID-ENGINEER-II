@@ -21,30 +21,23 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
 
-
         val loginModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
-        val observer = Observer<List<User>> {
-            val userName = et_username.text.toString()
-            for (user in it){
-                if (user.username == userName){
-                    println(userName)
-                    break
-                } else {
-                    println("failed")
-                    break
-                }
-            }
+
+        //TODO: make observer work with login token
+        val tokenObserver = Observer<String> {
+            println(it)
         }
 
         btn_register.setOnClickListener {
-            observer.onChanged(loginModel.userList.value)
-            loginModel.userList.observe(this, observer)
-
+            val registerIntent = Intent(this, RegisterActivity::class.java)
+            startActivity(registerIntent)
         }
 
         btn_login.setOnClickListener {
-            val intent = Intent(this, WalkthroughActivity::class.java)
-            startActivity(intent)
+            val user = User(et_username.text.toString(), et_password.text.toString())
+            loginModel.getToken(user)
+            loginModel.userToken.observe(this, tokenObserver)
+
         }
     }
 }

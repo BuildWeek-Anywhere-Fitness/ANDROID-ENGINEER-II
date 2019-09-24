@@ -7,7 +7,7 @@ import com.example.anywherefitness.model.User
 @Dao
 interface UserDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    /*@Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(fitnessClass: FitnessClass)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
@@ -17,7 +17,7 @@ interface UserDao {
     fun delete(fitnessClass: FitnessClass)
 
     @Query("SELECT * FROM user_table")
-    fun getAllFitnessClasses(): List<FitnessClass>
+    fun getAllFitnessClasses(): List<FitnessClass>*/
 
 
 }

@@ -11,9 +11,10 @@ import retrofit2.Response
 class LoginViewModel : ViewModel(){
 
     val userList = MutableLiveData<List<User>>()
+    val userToken = MutableLiveData<String>()
 
     init {
-        UserApiBuilder.userRetro().getUser().enqueue(object : Callback<List<User>> {
+        UserApiBuilder.userRetro().getUsers().enqueue(object : Callback<List<User>> {
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 println(t)
             }
@@ -28,5 +29,24 @@ class LoginViewModel : ViewModel(){
         })
     }
 
+    fun getToken(user: User) {
+        UserApiBuilder.userRetro().getLoginToken(user).enqueue(object : Callback<User> {
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                println(t)
+            }
+
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if (response.isSuccessful) {
+                    userToken.value = response.body()?.token
+                    //TODO: Save token so when they open the app they don't have to log in
+                } else {
+                    println(response)
+                }
+            }
+
+        })
+    }
 
 }
+
+
