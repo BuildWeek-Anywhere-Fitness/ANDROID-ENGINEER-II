@@ -6,8 +6,8 @@ import com.example.anywherefitness.model.FitnessClass
 
 class UserRepo (context: Context) {
 
-    /*private var userDao: UserDao
-    lateinit var fitnessClassList: List<FitnessClass>
+    private var userDao: UserDao
+    lateinit var fitnessClassList: MutableList<FitnessClass>
 
     init {
         val database: UserDatabase = UserDatabase.getInstance(context)!!
@@ -26,7 +26,11 @@ class UserRepo (context: Context) {
         DeleteFitnessClassAsyncTask(userDao).execute(fitnessClass)
     }
 
-    fun getAllFitnessClasss(): List<FitnessClass> {
+    fun deleteClassById(classId: Int) {
+        DeleteFitnessClassByIdAsyncTask(userDao).execute(classId)
+    }
+
+    fun getAllFitnessClasss(): MutableList<FitnessClass> {
         return AllFitnessClassAsyncTask(userDao).execute().get()
     }
 
@@ -56,19 +60,27 @@ class UserRepo (context: Context) {
             }
         }
 
-        private class AllFitnessClassAsyncTask(userDao: UserDao) : AsyncTask<FitnessClass, Unit, List<FitnessClass>>() {
+        private class DeleteFitnessClassByIdAsyncTask(userDao: UserDao) : AsyncTask<Int, Unit, Unit>() {
             val UserDao = userDao
 
-            override fun doInBackground(vararg p0: FitnessClass?): List<FitnessClass> {
+            override fun doInBackground(vararg p0: Int?) {
+                UserDao.deleteClassById(p0[0]!!)
+            }
+        }
+
+        private class AllFitnessClassAsyncTask(userDao: UserDao) : AsyncTask<FitnessClass, Unit, MutableList<FitnessClass>>() {
+            val UserDao = userDao
+
+            override fun doInBackground(vararg p0: FitnessClass?): MutableList<FitnessClass> {
                 val fitnessClassList = UserDao.getAllFitnessClasses()
                 return fitnessClassList
             }
 
-            override fun onPostExecute(result: List<FitnessClass>?) {
+            override fun onPostExecute(result: MutableList<FitnessClass>?) {
                 super.onPostExecute(result)
                 val fitnessClassList = result
 
             }
         }
-    }*/
+    }
 }

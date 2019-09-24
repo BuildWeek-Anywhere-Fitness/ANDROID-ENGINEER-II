@@ -4,12 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.anywherefitness.model.FitnessClass
 import com.example.anywherefitness.model.User
 
-//@Database(entities = [User::class], exportSchema = true, version = 1)
+@Database(entities = [FitnessClass::class], exportSchema = true, version = 2)
 abstract class UserDatabase : RoomDatabase() {
 
-    /*abstract fun userDao(): UserDao
+    abstract fun userDao(): UserDao
 
     companion object {
         private var instance: UserDatabase? = null
@@ -28,5 +29,5 @@ abstract class UserDatabase : RoomDatabase() {
             }
             return instance //as MovieDatabase
         }
-    }*/
+    }
 }

@@ -1,16 +1,21 @@
 package com.example.anywherefitness.ui.Instructor
 
+import android.app.Application
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
 
-class CreateClassViewModel : ViewModel() {
+class CreateClassViewModel(application: Application) : AndroidViewModel(application) {
 
-    /*private val _text = MutableLiveData<String>().apply {
+    private var repo: UserRepo = UserRepo(application)
+
+    private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
     }
     val text: LiveData<String> = _text
@@ -40,11 +45,16 @@ class CreateClassViewModel : ViewModel() {
             durationInt,
             intensityInt,
             etLocation.text.toString(),
+            InstructorActivity.user.id,
             attendeesInt,
             sizeInt)
 
         return newClass
-    }*/
+    }
+
+    fun insert(newClass: FitnessClass) {
+        repo.insert(newClass)
+    }
 
     fun saveClass(newClass: FitnessClass) {
         //make appropriate db calls and ui updates here
