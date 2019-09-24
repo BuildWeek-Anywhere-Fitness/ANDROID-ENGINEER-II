@@ -10,7 +10,7 @@ import com.example.anywherefitness.model.FitnessClass
 
 class CreateClassViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
+    /*private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
     }
     val text: LiveData<String> = _text
@@ -44,7 +44,7 @@ class CreateClassViewModel : ViewModel() {
             sizeInt)
 
         return newClass
-    }
+    }*/
 
     fun saveClass(newClass: FitnessClass) {
         //make appropriate db calls and ui updates here

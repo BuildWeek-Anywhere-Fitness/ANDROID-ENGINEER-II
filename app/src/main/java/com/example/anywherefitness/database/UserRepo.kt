@@ -6,7 +6,7 @@ import com.example.anywherefitness.model.FitnessClass
 
 class UserRepo (context: Context) {
 
-    private var userDao: UserDao
+    /*private var userDao: UserDao
     lateinit var fitnessClassList: List<FitnessClass>
 
     init {
@@ -70,5 +70,5 @@ class UserRepo (context: Context) {
 
             }
         }
-    }
+    }*/
 }

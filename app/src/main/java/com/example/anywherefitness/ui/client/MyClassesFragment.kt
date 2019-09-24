@@ -37,10 +37,10 @@ class MyClassesFragment : Fragment() {
 
         myFitnessClassList = mutableListOf()
 
-        myFitnessClassList.add(FitnessClass("test", "test", "test", 43, 10, "test", 10, 15))
+        /*myFitnessClassList.add(FitnessClass("test", "test", "test", 43, 10, "test", 10, 15))
         myFitnessClassList.add(FitnessClass("test2", "test2", "test2", 43, 10, "test2", 10, 15))
         myFitnessClassList.add(FitnessClass("test3", "test3", "test3", 43, 10, "test3", 10, 15))
-
+*/
 
         myClassesViewModel.setupRecycler(context,
             myFitnessClassList,

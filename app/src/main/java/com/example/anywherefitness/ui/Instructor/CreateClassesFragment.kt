@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_create_class_instructor.*
 
 class CreateClassesFragment : Fragment() {
 
-    private lateinit var createClassViewModel: CreateClassViewModel
+    /*private lateinit var createClassViewModel: CreateClassViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,5 +48,5 @@ class CreateClassesFragment : Fragment() {
             createClassViewModel.saveClass(newClass)
             Toast.makeText(context, "new class created ${newClass.name} ${newClass.numberOfAttendees}", Toast.LENGTH_LONG).show()
         }
-    }
+    }*/
 }
