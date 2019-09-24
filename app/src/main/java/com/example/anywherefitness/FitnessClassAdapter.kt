@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
 
 class FitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>,
                            clickListener: View.OnClickListener,
-                           longClickListener: View.OnLongClickListener): RecyclerView.Adapter<FitnessClassAdapter.ViewHolder>() {
+                           longClickListener: View.OnLongClickListener?): RecyclerView.Adapter<FitnessClassAdapter.ViewHolder>() {
 
     private val clickListener = clickListener
     private val longClickListener = longClickListener
