@@ -15,7 +15,7 @@ import com.example.anywherefitness.model.FitnessClass
 
 class InstructorClassesViewModel(application: Application) : AndroidViewModel(application) {
 
-    private var repo = UserRepo(application)
+    var repo = UserRepo(application)
     var instructorFitnessClassList: MutableList<FitnessClass> = repo.getAllFitnessClasss()
 
     private val _text = MutableLiveData<String>().apply {
@@ -33,6 +33,8 @@ class InstructorClassesViewModel(application: Application) : AndroidViewModel(ap
         repo.deleteClassById(classId)
     }
 
+    //TODO: add api call to get all classes for this instructor
+
     fun getAllClasses(): MutableList<FitnessClass> {
         var instructorFitnessClassList: MutableList<FitnessClass> = repo.getAllFitnessClasss()
         return instructorFitnessClassList
@@ -40,13 +42,12 @@ class InstructorClassesViewModel(application: Application) : AndroidViewModel(ap
 
     fun setupRecycler(context: Context?,
                       fitnessClassList: MutableList<FitnessClass>,
-                      clickListener: View.OnClickListener,
-                      longClickListener: View.OnLongClickListener,
-                      recyclerView: RecyclerView) {
+                      recyclerView: RecyclerView,
+                      repo: UserRepo) {
         recyclerView.apply {
             setHasFixedSize(false)
             layoutManager = LinearLayoutManager(context)
-            adapter = FitnessClassAdapter(fitnessClassList, clickListener, longClickListener)
+            adapter = FitnessClassAdapter(fitnessClassList, repo)
         }
     }
 

@@ -30,6 +30,11 @@ class UserRepo (context: Context) {
         DeleteFitnessClassByIdAsyncTask(userDao).execute(classId)
     }
 
+    //this will be used when a user logs in, to clean out the database and the we will re-populate with the result from the api
+    fun deleteAllClasses() {
+        DeleteAllClassesAysncTask(userDao).execute()
+    }
+
     fun getAllFitnessClasss(): MutableList<FitnessClass> {
         return AllFitnessClassAsyncTask(userDao).execute().get()
     }
@@ -65,6 +70,14 @@ class UserRepo (context: Context) {
 
             override fun doInBackground(vararg p0: Int?) {
                 UserDao.deleteClassById(p0[0]!!)
+            }
+        }
+
+        private class DeleteAllClassesAysncTask(userDao: UserDao) : AsyncTask<Unit, Unit, Unit>() {
+            val UserDao = userDao
+
+            override fun doInBackground(vararg p0: Unit?) {
+                UserDao.deleteAllClasses()
             }
         }
 

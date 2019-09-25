@@ -21,4 +21,7 @@ interface UserDao {
 
     @Query("DELETE FROM class_table WHERE id = :id")
     fun deleteClassById(id: Int)
+
+    @Query("DELETE FROM class_table")
+    fun deleteAllClasses()
 }

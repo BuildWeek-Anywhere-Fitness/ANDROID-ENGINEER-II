@@ -6,16 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
 import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
-import kotlinx.android.synthetic.main.fragment_classes_instructor.*
 
-class FitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>, val repo: UserRepo): RecyclerView.Adapter<FitnessClassAdapter.ViewHolder>() {
 
-    private lateinit var context: Context
+class SearchFitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>, val repo: UserRepo):
+    RecyclerView.Adapter<SearchFitnessClassAdapter.ViewHolder>() {
+
+    lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
@@ -37,23 +39,22 @@ class FitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>, val 
         holder.fitnessClassAttendees.text = fitnessClass.numberOfAttendees.toString()
         holder.fitnessClassMaxSize.text = fitnessClass.classSize.toString()
         holder.fitnessClassId.text = fitnessClass.id.toString()
-        holder.fitnessClassParent.setOnLongClickListener {
+        holder.fitnessClassParent.setOnClickListener {
 
             val builder = AlertDialog.Builder(context)
-            builder.setTitle("Delete Class")
-            builder.setMessage("Are you sure you want to delete this class?")
+            builder.setTitle("Register Class")
+            builder.setMessage("Are you sure you want to register for this class?")
             builder.setPositiveButton("YES"){dialog, which ->
-                repo.deleteClassById(fitnessClass.id)
+                repo.insert(fitnessClass)
                 fitnessClassList.removeAt(position)
                 notifyDataSetChanged()
+                Toast.makeText(context, "Registered for Class ${fitnessClass.name}", Toast.LENGTH_LONG).show()
             }
             builder.setNegativeButton("NO"){_, _ ->}
 
             val dialog: AlertDialog = builder.create()
             dialog.show()
-            true
         }
-
     }
 
 

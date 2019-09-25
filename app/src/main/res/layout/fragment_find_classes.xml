@@ -6,6 +6,28 @@
     android:clickable="true"
     android:background="@android:color/white">
 
+    <LinearLayout
+        android:id="@+id/ll_find_classes"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/et_find_classes"
+            android:hint="Search for Classes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_search_classes"
+            android:text="Search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/text_notifications"
         android:text="FIND CLASSES HERE"
@@ -18,7 +40,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/ll_find_classes" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_find_classes"
