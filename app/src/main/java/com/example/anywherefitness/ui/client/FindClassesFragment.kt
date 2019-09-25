@@ -10,12 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.anywherefitness.R
 import com.example.anywherefitness.model.FitnessClass
+import com.example.anywherefitness.model.FitnessClassResult
 import kotlinx.android.synthetic.main.fragment_find_classes.*
 
 class FindClassesFragment : Fragment() {
 
     private lateinit var findClassesViewModel: FindClassesViewModel
-    private lateinit var fitnessClassList: MutableList<FitnessClass>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,15 +34,16 @@ class FindClassesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        
+        val something = Observer<List<FitnessClass>> { findClassesViewModel.setupRecycler(context,
+            it.toMutableList(),
+            rv_find_classes,
+            findClassesViewModel.repo) }
 
         btn_search_classes.setOnClickListener {
-            fitnessClassList = findClassesViewModel.searchClasses()
+            findClassesViewModel.searchClasses()
+            findClassesViewModel.resultList.observe(this, something)
             rv_find_classes.adapter?.notifyDataSetChanged()
         }
-
-        findClassesViewModel.setupRecycler(context,
-            fitnessClassList,
-            rv_find_classes,
-            findClassesViewModel.repo)
     }
 }

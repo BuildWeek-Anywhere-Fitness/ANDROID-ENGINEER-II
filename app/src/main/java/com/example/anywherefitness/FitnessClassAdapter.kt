@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
 import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
-import kotlinx.android.synthetic.main.fragment_classes_instructor.*
 
 class FitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>, val repo: UserRepo): RecyclerView.Adapter<FitnessClassAdapter.ViewHolder>() {
 
@@ -30,12 +29,12 @@ class FitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>, val 
         val fitnessClass = fitnessClassList[position]
         holder.fitnessClassName.text = fitnessClass.name
         holder.fitnessClassType.text = fitnessClass.type
-        holder.fitnessClassTime.text = fitnessClass.startTime
+        holder.fitnessClassTime.text = fitnessClass.starttime
         holder.fitnessClassDuration.text = fitnessClass.duration.toString()
         holder.fitnessClassIntensity.text = fitnessClass.intensity.toString()
         holder.fitnessClassLocation.text = fitnessClass.location
         holder.fitnessClassAttendees.text = fitnessClass.numberOfAttendees.toString()
-        holder.fitnessClassMaxSize.text = fitnessClass.classSize.toString()
+        holder.fitnessClassMaxSize.text = fitnessClass.max_size.toString()
         holder.fitnessClassId.text = fitnessClass.id.toString()
         holder.fitnessClassParent.setOnLongClickListener {
 
