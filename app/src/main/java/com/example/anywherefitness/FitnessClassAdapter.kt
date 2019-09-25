@@ -34,6 +34,7 @@ class FitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>,
         holder.fitnessClassLocation.text = fitnessClass.location
         holder.fitnessClassAttendees.text = fitnessClass.numberOfAttendees.toString()
         holder.fitnessClassMaxSize.text = fitnessClass.classSize.toString()
+        holder.fitnessClassId.text = fitnessClass.id.toString()
         holder.fitnessClassParent.setOnClickListener(clickListener)
         holder.fitnessClassParent.setOnLongClickListener(longClickListener)
 
@@ -50,5 +51,6 @@ class FitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>,
         val fitnessClassAttendees: TextView = view.tv_class_registered_attendees
         val fitnessClassMaxSize: TextView = view.tv_class_max_size
         val fitnessClassParent: CardView = view.cv_parent
+        val fitnessClassId: TextView = view.tv_class_id
     }
 }

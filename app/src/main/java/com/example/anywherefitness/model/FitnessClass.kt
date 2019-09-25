@@ -12,10 +12,9 @@ class FitnessClass (
     val intensity: Int,
     val location: String,
     val instructor_id: Int,
-    val instructor: Boolean,
     val numberOfAttendees: Int,
     val classSize: Int,
 
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 )

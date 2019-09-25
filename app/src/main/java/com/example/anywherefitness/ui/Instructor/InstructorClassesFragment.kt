@@ -1,5 +1,7 @@
 package com.example.anywherefitness.ui.Instructor
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +11,17 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.anywherefitness.FitnessClassAdapter
 import com.example.anywherefitness.R
 import com.example.anywherefitness.model.FitnessClass
+import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
 import kotlinx.android.synthetic.main.fragment_classes_instructor.*
 
 class InstructorClassesFragment : Fragment() {
 
     private lateinit var instructorClassesViewModel: InstructorClassesViewModel
+    private lateinit var fitnessClassList : MutableList<FitnessClass>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,11 +41,15 @@ class InstructorClassesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //fitnessClassList.add(FitnessClass("test", "test", "test", 43, 10, "test", 10, 15))
-        //fitnessClassList.add(FitnessClass("test2", "test2", "test2", 43, 10, "test2", 10, 15))
-        //fitnessClassList.add(FitnessClass("test3", "test3", "test3", 43, 10, "test3", 10, 15))
+        fitnessClassList = instructorClassesViewModel.getAllClasses()
 
-        instructorClassesViewModel.setupRecycler(context, fitnessClassList, clickListener, longClickListener, rv_instructor_classes)
+        //instructorClassesViewModel.setupRecycler(context, fitnessClassList, clickListener, longClickListener, rv_instructor_classes)
+
+        rv_instructor_classes.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            adapter = FitnessClassAdapter(fitnessClassList, clickListener, longClickListener)
+        }
     }
 
     val clickListener =  View.OnClickListener {
@@ -47,11 +57,24 @@ class InstructorClassesFragment : Fragment() {
         it.setBackgroundColor(color)
     }
 
+
     val longClickListener = View.OnLongClickListener {
-        Toast.makeText(context, "Long Click", Toast.LENGTH_LONG).show()
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Delete Class")
+        builder.setMessage("Are you sure you want to delete this class?")
+        builder.setPositiveButton("YES"){dialog, which ->
+            //add appropriate database calls here and ui update here
+            val classIdString = it.tv_class_id.text.toString()
+            val classId = classIdString.toInt()
+            instructorClassesViewModel.deleteClassById(classId)
+            fitnessClassList = instructorClassesViewModel.getAllClasses()
+            rv_instructor_classes.adapter?.notifyDataSetChanged()
+        }
+
+        builder.setNegativeButton("NO"){_, _ ->}
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
         true
     }
-
-    val fitnessClassList = mutableListOf<FitnessClass>()
-
 }

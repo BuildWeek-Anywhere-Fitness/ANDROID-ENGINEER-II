@@ -9,8 +9,13 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.anywherefitness.R
+import com.example.anywherefitness.model.User
 
 class InstructorActivity : AppCompatActivity() {
+
+    companion object {
+        val user = User("name", "pass", true, "", 1)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
