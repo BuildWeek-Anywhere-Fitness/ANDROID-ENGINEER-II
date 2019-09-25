@@ -45,7 +45,7 @@ class CreateClassViewModel(application: Application) : AndroidViewModel(applicat
             durationInt,
             intensityInt,
             etLocation.text.toString(),
-            InstructorActivity.user.id,
+            1,
             attendeesInt,
             sizeInt)
 

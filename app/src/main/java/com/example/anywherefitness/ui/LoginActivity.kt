@@ -14,16 +14,21 @@ import com.example.anywherefitness.viewmodel.LoginViewModel
 import com.example.anywherefitness.R
 import com.example.anywherefitness.model.User
 import com.example.anywherefitness.ui.Instructor.InstructorActivity
+import com.squareup.moshi.Json
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_walkthrough.view.*
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class LoginActivity : AppCompatActivity() {
 
     companion object {
         val REGISTER_CODE = 210
-        val SAVE_TOKEN = "saved preference"
+        val SAVE_TOKEN = "saved preference5"
         val GET_SAVE_TOKEN = "token"
     }
 
@@ -32,34 +37,45 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         val saveToken = getSharedPreferences(SAVE_TOKEN, Context.MODE_PRIVATE)
-
         val getSavedToken = saveToken.getString(GET_SAVE_TOKEN, "default")
-        println(getSavedToken)
-
-
-        /*if (save token works & have seen walk through){
-            when(User.isInstructor){
-                true -> startActivity(Intent(this, InstructorActivity::class.java))
-                false -> startActivity(Intent(this, ClientActivity::class.java))
-            }
-        } else if (save toke works & ! have seen walk through){
-            startActivity(Intent(this, WalkthroughActivity::class.java))
-        } else {
-            logIn()
-        }*/
 
         val loginModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
-        //TODO: make observer work with login token
         val tokenObserver = Observer<String> {
-            println(it)
             if (it != null) {
                 saveToken.edit {
                     this.putString(GET_SAVE_TOKEN, it)
                     this.commit()
                 }
+                loginModel.getCurrentUser(it)
             }
+        }
+
+        val userObserver = Observer<User> {
+            if (it.watchedWalkthrough){
+                when(it.instructor){
+                    true -> startActivity(Intent(this, InstructorActivity::class.java))
+                    false -> startActivity(Intent(this, ClientActivity::class.java))
+                }
+            } else {
+                startActivity(Intent(this, WalkthroughActivity::class.java))
+            }
+        }
+
+
+        if (getSavedToken != "default") {
+            getSavedToken?.let {
+                loginModel.getCurrentUser(it)
+            }
+            loginModel.currentUser.observe(this, userObserver)
         }
 
         btn_register.setOnClickListener {
@@ -71,6 +87,7 @@ class LoginActivity : AppCompatActivity() {
             val user = User(et_username.text.toString(), et_password.text.toString())
             loginModel.getToken(user)
             loginModel.userToken.observe(this, tokenObserver)
+            loginModel.currentUser.observe(this, userObserver)
 
         }
     }

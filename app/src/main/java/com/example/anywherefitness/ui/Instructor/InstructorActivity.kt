@@ -14,7 +14,7 @@ import com.example.anywherefitness.model.User
 class InstructorActivity : AppCompatActivity() {
 
     companion object {
-        val user = User("name", "pass", true, "", 1)
+        //val user = User("name", "pass", true, "", 1)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
