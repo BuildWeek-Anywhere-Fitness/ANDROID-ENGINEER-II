@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.anywherefitness.model.FitnessClass
 import com.example.anywherefitness.model.User
 
-@Database(entities = [FitnessClass::class], exportSchema = true, version = 2)
+@Database(entities = [FitnessClass::class], exportSchema = true, version = 3)
 abstract class UserDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao

@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +16,7 @@ import com.example.anywherefitness.FitnessClassAdapter
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
 
-class MyClassesViewModel(application: Application) : ViewModel() {
+class MyClassesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _text = MutableLiveData<String>().apply {
         value = "My Classes Fragment"

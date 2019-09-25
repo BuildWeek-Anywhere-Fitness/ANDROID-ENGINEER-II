@@ -22,6 +22,7 @@ class CreateClassViewModel(application: Application) : AndroidViewModel(applicat
 
     //TODO: add sync with api when new class is created, can likely just do it when create class button is clicked because it won't be done
     //as frequently
+    //TODO: fix things after changing class constructor to match api
     fun createClass(etName: EditText,
                     etType: EditText,
                     etTime: EditText,
@@ -33,9 +34,9 @@ class CreateClassViewModel(application: Application) : AndroidViewModel(applicat
 
         //can't convert et.text to Int in constructor
         val duration = etDuration.text.toString()
-        val durationInt = duration.toInt()
+        //val durationInt = duration.toInt()
         val intensity = etIntensity.text.toString()
-        val intensityInt = intensity.toInt()
+        //val intensityInt = intensity.toInt()
         val attendees = etAttendees.text.toString()
         val attendeesInt = attendees.toInt()
         val size = etSize.text.toString()
@@ -44,8 +45,8 @@ class CreateClassViewModel(application: Application) : AndroidViewModel(applicat
         val newClass = FitnessClass(etName.text.toString(),
             etType.text.toString(),
             etTime.text.toString(),
-            durationInt,
-            intensityInt,
+            duration,
+            intensity,
             etLocation.text.toString(),
             1,
             attendeesInt,

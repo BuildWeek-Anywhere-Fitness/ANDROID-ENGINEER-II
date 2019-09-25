@@ -32,12 +32,12 @@ class SearchFitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>
         val fitnessClass = fitnessClassList[position]
         holder.fitnessClassName.text = fitnessClass.name
         holder.fitnessClassType.text = fitnessClass.type
-        holder.fitnessClassTime.text = fitnessClass.startTime
-        holder.fitnessClassDuration.text = fitnessClass.duration.toString()
-        holder.fitnessClassIntensity.text = fitnessClass.intensity.toString()
+        holder.fitnessClassTime.text = fitnessClass.starttime
+        holder.fitnessClassDuration.text = fitnessClass.duration
+        holder.fitnessClassIntensity.text = fitnessClass.intensity
         holder.fitnessClassLocation.text = fitnessClass.location
         holder.fitnessClassAttendees.text = fitnessClass.numberOfAttendees.toString()
-        holder.fitnessClassMaxSize.text = fitnessClass.classSize.toString()
+        holder.fitnessClassMaxSize.text = fitnessClass.max_size.toString()
         holder.fitnessClassId.text = fitnessClass.id.toString()
         holder.fitnessClassParent.setOnClickListener {
 
