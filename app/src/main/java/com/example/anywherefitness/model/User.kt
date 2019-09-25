@@ -9,6 +9,7 @@ class User (
     val password: String,
     val instructor: Boolean = false,
     val token: String = "",
+    val watchedWalkthrough: Boolean = false,
 
     @PrimaryKey(autoGenerate = false)
     val id: Int = 0
