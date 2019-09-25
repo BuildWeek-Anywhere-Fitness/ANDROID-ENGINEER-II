@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
 import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
-import kotlinx.android.synthetic.main.fragment_classes_instructor.*
 
-class FitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>, val repo: UserRepo): RecyclerView.Adapter<FitnessClassAdapter.ViewHolder>() {
 
-    private lateinit var context: Context
+class ClientFitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>, val repo: UserRepo): RecyclerView.Adapter<ClientFitnessClassAdapter.ViewHolder>() {
+
+    lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
@@ -40,8 +40,8 @@ class FitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>, val 
         holder.fitnessClassParent.setOnLongClickListener {
 
             val builder = AlertDialog.Builder(context)
-            builder.setTitle("Delete Class")
-            builder.setMessage("Are you sure you want to delete this class?")
+            builder.setTitle("Unregister Class")
+            builder.setMessage("Are you sure you want to unregister from this class?")
             builder.setPositiveButton("YES"){dialog, which ->
                 repo.deleteClassById(fitnessClass.id)
                 fitnessClassList.removeAt(position)

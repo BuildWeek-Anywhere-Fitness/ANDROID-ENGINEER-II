@@ -43,38 +43,11 @@ class InstructorClassesFragment : Fragment() {
 
         fitnessClassList = instructorClassesViewModel.getAllClasses()
 
-        //instructorClassesViewModel.setupRecycler(context, fitnessClassList, clickListener, longClickListener, rv_instructor_classes)
-
-        rv_instructor_classes.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            adapter = FitnessClassAdapter(fitnessClassList, clickListener, longClickListener)
-        }
-    }
-
-    val clickListener =  View.OnClickListener {
-        val color = resources.getColor(R.color.colorAccent)
-        it.setBackgroundColor(color)
-    }
-
-
-    val longClickListener = View.OnLongClickListener {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle("Delete Class")
-        builder.setMessage("Are you sure you want to delete this class?")
-        builder.setPositiveButton("YES"){dialog, which ->
-            //add appropriate database calls here and ui update here
-            val classIdString = it.tv_class_id.text.toString()
-            val classId = classIdString.toInt()
-            instructorClassesViewModel.deleteClassById(classId)
-            fitnessClassList = instructorClassesViewModel.getAllClasses()
-            rv_instructor_classes.adapter?.notifyDataSetChanged()
-        }
-
-        builder.setNegativeButton("NO"){_, _ ->}
-
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-        true
+        instructorClassesViewModel.setupRecycler(
+            context,
+            fitnessClassList,
+            rv_instructor_classes,
+            instructorClassesViewModel.repo
+        )
     }
 }

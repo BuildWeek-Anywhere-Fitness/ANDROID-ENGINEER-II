@@ -35,18 +35,12 @@ class MyClassesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        myFitnessClassList = mutableListOf()
-
-        /*myFitnessClassList.add(FitnessClass("test", "test", "test", 43, 10, "test", 10, 15))
-        myFitnessClassList.add(FitnessClass("test2", "test2", "test2", 43, 10, "test2", 10, 15))
-        myFitnessClassList.add(FitnessClass("test3", "test3", "test3", 43, 10, "test3", 10, 15))
-*/
+        myFitnessClassList = myClassesViewModel.getAllClasses()
 
         myClassesViewModel.setupRecycler(context,
             myFitnessClassList,
-            myClassesViewModel.setClickListner(context),
-            null,
-            rv_my_classes)
+            rv_my_classes,
+            myClassesViewModel.repo)
 
     }
 }

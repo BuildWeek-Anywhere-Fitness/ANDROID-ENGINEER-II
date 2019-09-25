@@ -20,6 +20,8 @@ class CreateClassViewModel(application: Application) : AndroidViewModel(applicat
     }
     val text: LiveData<String> = _text
 
+    //TODO: add sync with api when new class is created, can likely just do it when create class button is clicked because it won't be done
+    //as frequently
     fun createClass(etName: EditText,
                     etType: EditText,
                     etTime: EditText,

@@ -35,17 +35,14 @@ class FindClassesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fitnessClassList = mutableListOf()
-
-        /*fitnessClassList.add(FitnessClass("test", "test", "test", 43, 10, "test", 10, 15))
-        fitnessClassList.add(FitnessClass("test2", "test2", "test2", 43, 10, "test2", 10, 15))
-        fitnessClassList.add(FitnessClass("test3", "test3", "test3", 43, 10, "test3", 10, 15))
-*/
+        btn_search_classes.setOnClickListener {
+            fitnessClassList = findClassesViewModel.searchClasses()
+            rv_find_classes.adapter?.notifyDataSetChanged()
+        }
 
         findClassesViewModel.setupRecycler(context,
             fitnessClassList,
-            findClassesViewModel.setClickListner(context),
-            null,
-            rv_find_classes)
+            rv_find_classes,
+            findClassesViewModel.repo)
     }
 }
