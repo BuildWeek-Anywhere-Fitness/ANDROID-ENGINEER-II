@@ -12,6 +12,7 @@ import com.example.anywherefitness.model.User
 import com.example.anywherefitness.viewmodel.LoginViewModel
 import com.example.anywherefitness.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlin.system.exitProcess
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -51,5 +52,11 @@ class RegisterActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+        exitProcess(0)
     }
 }
