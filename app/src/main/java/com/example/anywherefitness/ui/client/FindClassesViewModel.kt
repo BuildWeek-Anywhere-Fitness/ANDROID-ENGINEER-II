@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anywherefitness.Api.UserApiBuilder
 import com.example.anywherefitness.FitnessClassAdapter
-import com.example.anywherefitness.SearchFitnessClassAdapter
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
 import com.example.anywherefitness.model.FitnessClassResult
@@ -28,28 +27,11 @@ class FindClassesViewModel(application: Application) : AndroidViewModel(applicat
         value = "Find Classes Fragment"
     }
     val text: LiveData<String> = _text
-    val repo = UserRepo(application)
+
     var resultList = MutableLiveData<List<FitnessClass>>()
 
-    //TODO: figure out when/how to sync with api
-    //on click listener in the adapter will add class to database, will also need to add to api, but we probably don't want to do that
-    //everytime, so somewhere we will need to do a sync with api
-    fun setupRecycler(context: Context?,
-                      fitnessClassList: MutableList<FitnessClass>,
-                      recyclerView: RecyclerView,
-                      repo: UserRepo
-    ) {
-        recyclerView.apply {
-            setHasFixedSize(false)
-            layoutManager = LinearLayoutManager(context)
-            adapter = SearchFitnessClassAdapter(fitnessClassList, repo)
-        }
-    }
 
-    fun searchClasses() {
-        //TODO: api call to search classes here and return list of fitnessclass
-        //possibly do somekind of check to not show classes client is already signed up for
-
+    init {
         UserApiBuilder.userRetro().getAllClasses().enqueue(object: Callback<List<FitnessClass>> {
 
             override fun onFailure(call: Call<List<FitnessClass>>, t: Throwable) {
@@ -67,5 +49,7 @@ class FindClassesViewModel(application: Application) : AndroidViewModel(applicat
 
         })
     }
+
+
 }
 
