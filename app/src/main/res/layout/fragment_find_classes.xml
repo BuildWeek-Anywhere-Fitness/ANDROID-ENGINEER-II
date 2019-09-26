@@ -13,17 +13,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/et_find_classes"
-            android:hint="Search for Classes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
-        <Button
-            android:id="@+id/btn_search_classes"
-            android:text="Search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
         <SearchView
             android:id="@+id/sv_find"
