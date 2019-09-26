@@ -71,6 +71,7 @@ class CreateFitnessClass (
     val duration: String,
     val intensity: String,
     val max_size: String,
-    val starttime: String,
-    val instructor_id: Int
+    val starttime: String?,
+    val instructor_id: Int,
+    val id: Int?
 )
