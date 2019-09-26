@@ -30,7 +30,7 @@ class StartUpActivity : AppCompatActivity() {
         val loginModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
         val userObserver = Observer<User> {
-            if (it.watchedWalkthrough){
+            if (it != null){
                 when(it.instructor){
                     true -> {
                         startActivity(Intent(this, InstructorActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
@@ -42,7 +42,7 @@ class StartUpActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                startActivity(Intent(this, WalkthroughActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                startActivity(Intent(this, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                 finish()
             }
         }
