@@ -3,6 +3,7 @@ package com.example.anywherefitness.ui.Instructor
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +15,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.anywherefitness.Api.UserApiBuilder
 import com.example.anywherefitness.R
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
 import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
 import kotlinx.android.synthetic.main.fragment_classes_instructor.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class InstructorClassesFragment : Fragment() {
 
@@ -79,10 +84,23 @@ class InstructorClassesFragment : Fragment() {
                 builder.setTitle("Delete Class")
                 builder.setMessage("Are you sure you want to delete this class?")
                 builder.setPositiveButton("YES"){dialog, which ->
-                    instructorClassesViewModel.repo.deleteClassById(fitnessClass.id)
-                    fitnessClassList.removeAt(position)
-                    notifyDataSetChanged()
-                    //UserApiBuilder.userRetro().
+                    UserApiBuilder.userRetro().deleteClass(21).enqueue(object: Callback<Void> {
+                        override fun onFailure(call: Call<Void>, t: Throwable) {
+                            Log.i("BIGBRAIN", "onFailure $t")
+                        }
+
+                        override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                            if (response.isSuccessful) {
+                                instructorClassesViewModel.repo.deleteClassById(fitnessClass.id)
+                                fitnessClassList.removeAt(position)
+                                notifyDataSetChanged()
+                                Log.i("BIGBRAIN", "reponse success $response")
+                            } else {
+                                Log.i("BIGBRAIN", "reponse failed $response")
+                            }
+                        }
+
+                    })
                 }
                 builder.setNegativeButton("NO"){_, _ ->}
 

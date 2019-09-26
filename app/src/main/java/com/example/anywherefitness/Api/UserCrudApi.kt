@@ -4,11 +4,9 @@ import com.example.anywherefitness.model.CreateUser
 import com.example.anywherefitness.model.FitnessClass
 import com.example.anywherefitness.model.FitnessClassResult
 import com.example.anywherefitness.model.User
+import com.example.anywherefitness.ui.Instructor.CreateFitnessClass
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 //User
 //username, password, id, isInstructor
@@ -34,6 +32,12 @@ interface UserCrudApi {
 
     @GET("classes/client/{id}")
     fun getClientClass(@Path("id") id: Int): Call<FitnessClass>
+
+    @POST("classes")
+    fun addClass(@Body createFitnessClass: CreateFitnessClass): Call<CreateFitnessClass>
+
+    @DELETE("classes/{id}")
+    fun deleteClass(@Path("id") classIdPath: Int): Call<Void>
 
 
 

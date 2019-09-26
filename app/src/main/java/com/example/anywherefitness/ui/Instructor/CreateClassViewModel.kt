@@ -48,7 +48,7 @@ class CreateClassViewModel(application: Application) : AndroidViewModel(applicat
             duration,
             intensity,
             etLocation.text.toString(),
-            1,
+            11,
             attendeesInt,
             sizeInt)
 
@@ -63,3 +63,14 @@ class CreateClassViewModel(application: Application) : AndroidViewModel(applicat
         //make appropriate db calls and ui updates here
     }
 }
+
+class CreateFitnessClass (
+    val name: String,
+    val type: String,
+    val location: String,
+    val duration: String,
+    val intensity: String,
+    val max_size: String,
+    val starttime: String,
+    val instructor_id: Int
+)
