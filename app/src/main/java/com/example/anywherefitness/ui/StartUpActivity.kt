@@ -17,6 +17,7 @@ class StartUpActivity : AppCompatActivity() {
         val REGISTER_CODE = 210
         val SAVE_TOKEN = "saved preference"
         val GET_SAVE_TOKEN = "token"
+        val USER = "user"
 
     }
 
@@ -30,21 +31,22 @@ class StartUpActivity : AppCompatActivity() {
         val loginModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
         val userObserver = Observer<User> {
-            if (it != null){
+            val intent = if (it != null){
                 when(it.instructor){
                     true -> {
-                        startActivity(Intent(this, InstructorActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
-                        finish()
+                        Intent(this, InstructorActivity::class.java)
                     }
                     false -> {
-                        startActivity(Intent(this, ClientActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
-                        finish()
+                        Intent(this, ClientActivity::class.java)
                     }
                 }
             } else {
-                startActivity(Intent(this, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
-                finish()
+                Intent(this, LoginActivity::class.java)
             }
+            intent.putExtra(USER, it)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
         }
 
         if (getSavedToken != "default") {

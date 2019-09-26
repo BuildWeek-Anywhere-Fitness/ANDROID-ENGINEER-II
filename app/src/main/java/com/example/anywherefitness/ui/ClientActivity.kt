@@ -9,15 +9,23 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.anywherefitness.R
+import com.example.anywherefitness.model.User
 import com.example.anywherefitness.ui.client.FindClassesFragment
 import com.example.anywherefitness.ui.client.MyClassesFragment
 
 class ClientActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_client)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
+        val myClassesFragment = MyClassesFragment()
+        val user = intent.getSerializableExtra(StartUpActivity.USER) as User
+        val bundle = Bundle()
+        bundle.putSerializable("key", user)
+        myClassesFragment.arguments = bundle
 
         val navController = findNavController(R.id.nav_host_fragment_client)
         // Passing each menu ID as a set of Ids because each

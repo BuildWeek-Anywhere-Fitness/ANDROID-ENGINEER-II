@@ -55,7 +55,7 @@ class CreateClassesFragment : Fragment() {
             //TODO: figure out how to get class_Id back
             //TODO: get instructor_id programmatically
             //will either need to update in the my classes fragment, or figure out something here
-            val newCreateClass = CreateFitnessClass(newClass.name, newClass.type, newClass.location, newClass.duration, newClass.intensity,
+            val newCreateClass = CreateFitnessClass(newClass.name!!, newClass.type!!, newClass.location!!, newClass.duration!!, newClass.intensity!!,
                 newClass.max_size.toString(), newClass.starttime, 11, null)
 
             UserApiBuilder.userRetro().addClass(newCreateClass).enqueue(object: Callback<CreateFitnessClass> {

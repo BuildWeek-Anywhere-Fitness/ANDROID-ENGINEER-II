@@ -44,11 +44,6 @@ class MyClassesFragment : Fragment() {
 
         myFitnessClassList = myClassesViewModel.getAllClasses()
 
-        myClassesViewModel.setupRecycler(context,
-            myFitnessClassList,
-            rv_my_classes,
-            myClassesViewModel.repo)
-
         rv_my_classes.apply {
             setHasFixedSize(false)
             layoutManager = LinearLayoutManager(context)
