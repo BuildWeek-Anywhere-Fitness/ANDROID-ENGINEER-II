@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.anywherefitness.Api.UserApiBuilder
-import com.example.anywherefitness.FitnessClassAdapter
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
 import com.example.anywherefitness.model.FitnessClassResult

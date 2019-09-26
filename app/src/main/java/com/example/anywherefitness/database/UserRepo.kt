@@ -3,6 +3,7 @@ package com.example.anywherefitness.database
 import android.content.Context
 import android.os.AsyncTask
 import com.example.anywherefitness.model.FitnessClass
+import com.example.anywherefitness.model.User
 
 class UserRepo (context: Context) {
 
@@ -37,6 +38,10 @@ class UserRepo (context: Context) {
 
     fun getAllFitnessClasss(): MutableList<FitnessClass> {
         return AllFitnessClassAsyncTask(userDao).execute().get()
+    }
+
+    fun saveUser(user: User){
+        InsertUserAsyncTask(userDao).execute(user)
     }
 
     companion object {
@@ -93,6 +98,14 @@ class UserRepo (context: Context) {
                 super.onPostExecute(result)
                 val fitnessClassList = result
 
+            }
+        }
+
+        private class InsertUserAsyncTask(userDao: UserDao) : AsyncTask<User, Unit, Unit>() {
+            val UserDao = userDao
+
+            override fun doInBackground(vararg p0: User?) {
+                UserDao.saveUser(p0[0]!!)
             }
         }
     }
