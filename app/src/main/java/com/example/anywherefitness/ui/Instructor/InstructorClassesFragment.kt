@@ -48,8 +48,34 @@ class InstructorClassesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fitnessClassList = instructorClassesViewModel.getAllClasses()
+        //TODO: put this in view model, remove magic number for instructor id
+        //calling all classes here and then filtering for the correct instructor_id because when a class is posted it does not
+        //return the class_id, so we can't save it in the database correctly
+        UserApiBuilder.userRetro().getAllClasses().enqueue(object: Callback<List<FitnessClass>> {
+            override fun onFailure(call: Call<List<FitnessClass>>, t: Throwable) {
+                Log.i("BIGBRAIN", "onFailure $t")
+            }
 
+            override fun onResponse(call: Call<List<FitnessClass>>, response: Response<List<FitnessClass>>) {
+                if (response.isSuccessful) {
+                    Log.i("BIGBRAIN", "onReponse ${response.body()?.size}")
+                    instructorClassesViewModel.deleteAllClasses()
+                    fitnessClassList = response.body()!!.toMutableList()
+                    for (i in 0 until fitnessClassList.size) {
+                        if (fitnessClassList[i].instructor_id == 11) {
+                            instructorClassesViewModel.insert(fitnessClassList[i])
+                        }
+                    }
+                    fitnessClassList = instructorClassesViewModel.getAllClasses()
+                    rv_instructor_classes.adapter?.notifyDataSetChanged()
+                } else {
+                    Log.i("BIGBRAIN", "onReponse failure $response")
+                }
+            }
+
+        })
+
+        fitnessClassList = instructorClassesViewModel.getAllClasses()
         rv_instructor_classes.apply {
             setHasFixedSize(false)
             layoutManager = LinearLayoutManager(context)
@@ -84,7 +110,7 @@ class InstructorClassesFragment : Fragment() {
                 builder.setTitle("Delete Class")
                 builder.setMessage("Are you sure you want to delete this class?")
                 builder.setPositiveButton("YES"){dialog, which ->
-                    UserApiBuilder.userRetro().deleteClass(21).enqueue(object: Callback<Void> {
+                    UserApiBuilder.userRetro().deleteClass(fitnessClass.id).enqueue(object: Callback<Void> {
                         override fun onFailure(call: Call<Void>, t: Throwable) {
                             Log.i("BIGBRAIN", "onFailure $t")
                         }
