@@ -29,7 +29,8 @@ interface UserCrudApi {
     fun getAllClasses(): Call<List<FitnessClass>>
 
     @POST("classes/join/{id}")
-    fun addUserToClass(@Path("id") id: Int): Call<FitnessClass>
+    fun addUserToClass(@Path("id") id: Int,
+                       @Body userId: Int): Call<FitnessClass>
 
     @GET("classes/client/{id}")
     fun getClientClass(@Path("id") id: Int): Call<FitnessClass>

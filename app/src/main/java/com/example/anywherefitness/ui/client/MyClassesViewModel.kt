@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.anywherefitness.Api.UserApiBuilder
 import com.example.anywherefitness.ClientFitnessClassAdapter
 import com.example.anywherefitness.FitnessClassAdapter
 import com.example.anywherefitness.database.UserRepo
@@ -41,4 +42,6 @@ class MyClassesViewModel(application: Application) : AndroidViewModel(applicatio
         var instructorFitnessClassList: MutableList<FitnessClass> = repo.getAllFitnessClasss()
         return instructorFitnessClassList
     }
+
+
 }

@@ -2,6 +2,7 @@ package com.example.anywherefitness
 
 import android.app.AlertDialog
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +10,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.anywherefitness.Api.UserApiBuilder
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
+import com.example.anywherefitness.model.User
 import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class SearchFitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>, val repo: UserRepo):
@@ -45,10 +51,30 @@ class SearchFitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>
             builder.setTitle("Register Class")
             builder.setMessage("Are you sure you want to register for this class?")
             builder.setPositiveButton("YES"){dialog, which ->
-                repo.insert(fitnessClass)
-                fitnessClassList.removeAt(position)
-                notifyDataSetChanged()
-                Toast.makeText(context, "Registered for Class ${fitnessClass.name}", Toast.LENGTH_LONG).show()
+
+                //TODO: make this work, currently cannot post in postman either, backend is working on it
+                UserApiBuilder.userRetro().addUserToClass(fitnessClass.id, 12).enqueue(object: Callback<FitnessClass> {
+
+                    override fun onFailure(call: Call<FitnessClass>, t: Throwable) {
+                        Toast.makeText(context, "Error Registering for Class ${fitnessClass.name}", Toast.LENGTH_LONG).show()
+                        Log.i("BIGBRAIN", "onFailure " + t.toString())
+                    }
+
+                    override fun onResponse(call: Call<FitnessClass>, response: Response<FitnessClass>) {
+                        if (response.isSuccessful) {
+                            repo.insert(fitnessClass)
+                            fitnessClassList.removeAt(position)
+                            notifyDataSetChanged()
+                            Toast.makeText(context, "Registered for Class ${fitnessClass.name}", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(context, "Error Registering for Class ${fitnessClass.name}", Toast.LENGTH_LONG).show()
+                            Log.i("BIGBRAIN", "Response not successful " + response)
+                        }
+                    }
+
+                })
+
+
             }
             builder.setNegativeButton("NO"){_, _ ->}
 

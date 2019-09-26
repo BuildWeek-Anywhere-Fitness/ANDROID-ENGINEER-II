@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.anywherefitness.Api.UserApiBuilder
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
 import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
@@ -45,6 +46,7 @@ class FitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>, val 
                 repo.deleteClassById(fitnessClass.id)
                 fitnessClassList.removeAt(position)
                 notifyDataSetChanged()
+                //UserApiBuilder.userRetro().
             }
             builder.setNegativeButton("NO"){_, _ ->}
 
