@@ -24,4 +24,7 @@ interface UserDao {
 
     @Query("DELETE FROM class_table")
     fun deleteAllClasses()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveUser(user: User)
 }
