@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.anywherefitness.R
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
+import com.example.anywherefitness.model.User
+import com.example.anywherefitness.ui.ClientActivity
 import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
 import kotlinx.android.synthetic.main.fragment_my_classes.*
 
@@ -42,12 +44,12 @@ class MyClassesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        myFitnessClassList = myClassesViewModel.getAllClasses()
+        val user = arguments?.getString(ClientActivity.FRAGMENT_USER)
+        val i = 0
+        println(user)
 
-        myClassesViewModel.setupRecycler(context,
-            myFitnessClassList,
-            rv_my_classes,
-            myClassesViewModel.repo)
+
+        myFitnessClassList = myClassesViewModel.getAllClasses()
 
         rv_my_classes.apply {
             setHasFixedSize(false)
@@ -56,6 +58,7 @@ class MyClassesFragment : Fragment() {
         }
 
     }
+
 
     inner class ClientFitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>): RecyclerView.Adapter<ClientFitnessClassAdapter.ViewHolder>() {
 
