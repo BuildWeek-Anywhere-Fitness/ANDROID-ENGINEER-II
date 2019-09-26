@@ -18,32 +18,22 @@ class WalkthroughActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_walkthrough)
 
-        val loginModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        val user = intent.getSerializableExtra(StartUpActivity.USER) as User
 
-        val saveToken = getSharedPreferences(StartUpActivity.SAVE_TOKEN, Context.MODE_PRIVATE)
-        val getSavedToken = saveToken.getString(StartUpActivity.GET_SAVE_TOKEN, "default")
-
-        getSavedToken?.let {
-            if (it != "default"){
-                loginModel.getCurrentUser(it)
-            }
-        }
-
-        val userObserver = Observer<User> {
-            val intent = if (it.instructor) {
+            val intent = if (user.instructor) {
                 Intent(this, InstructorActivity::class.java)
             } else {
                 Intent(this, ClientActivity::class.java)
             }
-            startActivity(intent)
-            finish()
-        }
+
 
 
 
 
         btn_skip.setOnClickListener {
-            loginModel.currentUser.observe(this, userObserver)
+            intent.putExtra(StartUpActivity.USER, user)
+            startActivity(intent)
+            finish()
         }
     }
 }
