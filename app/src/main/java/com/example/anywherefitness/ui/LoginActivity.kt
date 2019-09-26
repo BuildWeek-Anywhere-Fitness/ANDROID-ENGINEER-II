@@ -47,21 +47,21 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val userObserver = Observer<User> {
-            val intent = if (it != null){
+            if (it.watchedWalkthrough){
                 when(it.instructor){
                     true -> {
-                        Intent(this, InstructorActivity::class.java)
+                        startActivity(Intent(this, InstructorActivity::class.java))
+                        finish()
                     }
                     false -> {
-                        Intent(this, ClientActivity::class.java)
+                        startActivity(Intent(this, ClientActivity::class.java))
+                        finish()
                     }
                 }
             } else {
-                Intent(this, LoginActivity::class.java)
+                startActivity(Intent(this, WalkthroughActivity::class.java))
+                finish()
             }
-            intent.putExtra(StartUpActivity.USER, it)
-            startActivity(intent)
-            finish()
         }
 
         btn_register.setOnClickListener {
