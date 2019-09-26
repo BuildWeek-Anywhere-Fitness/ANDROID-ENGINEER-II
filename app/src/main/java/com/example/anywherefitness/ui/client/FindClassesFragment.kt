@@ -14,13 +14,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.anywherefitness.Api.UserApiBuilder
 import com.example.anywherefitness.R
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
 import com.example.anywherefitness.model.FitnessClassResult
-import com.example.anywherefitness.model.User
-import com.example.anywherefitness.ui.ClientActivity
 import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
 import kotlinx.android.synthetic.main.fragment_find_classes.*
 
@@ -45,7 +42,6 @@ class FindClassesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         val list = mutableListOf<FitnessClass>()
 
@@ -111,7 +107,6 @@ class FindClassesFragment : Fragment() {
                 builder.setMessage("Are you sure you want to register for this class?")
                 builder.setPositiveButton("YES"){dialog, which ->
                     UserRepo(context!!).insert(fitnessClass)
-                    //UserApiBuilder.userRetro().addUserToClass(fitnessClass.id)
                     fitnessClassList.removeAt(position)
                     notifyDataSetChanged()
                     Toast.makeText(context, "Registered for Class ${fitnessClass.name}", Toast.LENGTH_LONG).show()

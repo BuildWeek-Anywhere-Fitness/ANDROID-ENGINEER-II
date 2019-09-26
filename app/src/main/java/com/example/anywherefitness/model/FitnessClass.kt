@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 class FitnessClass (
     val name: String = "",
     val type: String = "",
-    val starttime: String? = "",
+    val starttime: String = "",
     val duration: String = "",
     val intensity: String = "",
     val location: String = "",

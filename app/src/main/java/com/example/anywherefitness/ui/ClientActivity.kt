@@ -9,23 +9,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.anywherefitness.R
-import com.example.anywherefitness.model.User
 import com.example.anywherefitness.ui.client.FindClassesFragment
 import com.example.anywherefitness.ui.client.MyClassesFragment
 
 class ClientActivity : AppCompatActivity() {
 
-    companion object{
-        val FRAGMENT_USER = "fragment"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_client)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
-        val user = intent.getSerializableExtra(StartUpActivity.USER) as User
-
 
         val navController = findNavController(R.id.nav_host_fragment_client)
         // Passing each menu ID as a set of Ids because each
@@ -50,11 +42,12 @@ class ClientActivity : AppCompatActivity() {
                 }
             }
             selectedFragment?.let { it1 ->
-
-                val fragmentBundle = Bundle()
-                fragmentBundle.putString(FRAGMENT_USER, "test")
-                MyClassesFragment().arguments = fragmentBundle
-
+                /*val fragmentBundle = Bundle()
+                fragmentBundle.putSerializable(
+                    //FRAGMENT_KEY,
+                    //put extras if needed here
+                )*/
+                //selectedFragment.arguments = fragmentBundle
                 supportFragmentManager.beginTransaction().replace(
                     R.id.nav_host_fragment_client,
                     it1
