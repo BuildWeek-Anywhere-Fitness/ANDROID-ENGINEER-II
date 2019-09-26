@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -55,23 +56,43 @@ class FindClassesFragment : Fragment() {
 
         }
 
+
         findClassesViewModel.resultList.observe(this, something)
 
-        btn_search_classes.setOnClickListener {
-            val search = et_find_classes.text.toString()
+        sv_find.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             val newList = mutableListOf<FitnessClass>()
-            list.forEach {
-                when (search){
-                    it.name -> newList.add(it)
-                    it.duration -> newList.add(it)
-                    it.type -> newList.add(it)
-                    it.intensity -> newList.add(it)
-                    it.location -> newList.add(it)
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                list.forEach {
+                    when (p0){
+                        it.name -> newList.add(it)
+                        it.duration -> newList.add(it)
+                        it.type -> newList.add(it)
+                        it.intensity -> newList.add(it)
+                        it.location -> newList.add(it)
+                    }
                 }
+                list.clear()
+                list.addAll(newList)
+                rv_find_classes.adapter?.notifyDataSetChanged()
+                return true
             }
-            list.clear()
-            list.addAll(newList)
-            rv_find_classes.adapter?.notifyDataSetChanged()
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                list.clear()
+                newList.clear()
+                something.onChanged(findClassesViewModel.resultList.value)
+                if (p0.isNullOrBlank()){
+                    rv_find_classes.adapter?.notifyDataSetChanged()
+                }
+
+
+                return true
+            }
+
+        })
+
+        btn_search_classes.setOnClickListener {
+
         }
 
 
