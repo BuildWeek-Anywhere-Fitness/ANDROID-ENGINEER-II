@@ -52,6 +52,9 @@ class CreateClassesFragment : Fragment() {
                 et_class_size)
 
             //TODO: put this in view model
+            //TODO: figure out how to get class_Id back
+            //TODO: get instructor_id programmatically
+            //will either need to update in the my classes fragment, or figure out something here
             val newCreateClass = CreateFitnessClass(newClass.name, newClass.type, newClass.location, newClass.duration, newClass.intensity,
                 newClass.max_size.toString(), newClass.starttime, 11)
 
@@ -65,12 +68,12 @@ class CreateClassesFragment : Fragment() {
                     if (response.isSuccessful) {
                         createClassViewModel.insert(newClass)
                         Toast.makeText(context, "new class created ${newClass.name}", Toast.LENGTH_LONG).show()
+                        Log.i("BIGBRAIN", "success")
                     } else {
                         Toast.makeText(context, "onResponse failed to create class", Toast.LENGTH_LONG).show()
                         Log.i("BIGBRAIN", "onFailure $response")
                     }
                 }
-
             })
         }
     }
