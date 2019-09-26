@@ -2,7 +2,6 @@ package com.example.anywherefitness.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.io.Serializable
 
 @Entity(tableName = "user_table")
 class User (
@@ -14,7 +13,7 @@ class User (
 
     @PrimaryKey(autoGenerate = false)
     val id: Int = 0
-): Serializable
+)
 
 class CreateUser(
     val username: String,
