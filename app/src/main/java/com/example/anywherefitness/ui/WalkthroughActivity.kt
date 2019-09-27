@@ -18,21 +18,22 @@ class WalkthroughActivity : AppCompatActivity() {
         setContentView(R.layout.activity_walkthrough)
 
         val waltthroughlModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
-        var int = 0
+        var user: User? = null
         val userObserver = Observer<User> {
-            int = it.instructor
+            user = it
 
         }
 
         waltthroughlModel.getUser()?.observe(this, userObserver)
 
         userObserver.onChanged(waltthroughlModel.getUser()?.value)
-        val isInstructor = when(int){
+
+        /*val isInstructor = when(int){
             1 -> true
             else -> false
         }
-
-        val intent = if (isInstructor) {
+*/
+        val intent = if (user!!.instructor) {
             tv_walkthrough.text = "Create a class for clients to join"
             Intent(this, InstructorActivity::class.java)
         } else {
@@ -45,8 +46,6 @@ class WalkthroughActivity : AppCompatActivity() {
 
 
         btn_skip.setOnClickListener {
-
-
             startActivity(intent)
             finish()
         }
