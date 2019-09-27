@@ -24,7 +24,7 @@ interface UserCrudApi {
     fun getLoginToken(@Body user: User): Call<User>
 
     @GET("classes")
-    fun getAllClasses(): Call<List<FitnessClass>>
+    fun getAllClasses(@Header ("Authorization") token: String): Call<List<FitnessClass>>
 
     @POST("classes/join/{id}")
     fun addUserToClass(@Path("id") id: Int,
@@ -34,10 +34,10 @@ interface UserCrudApi {
     fun getClientClass(@Path("id") id: Int): Call<FitnessClass>
 
     @POST("classes")
-    fun addClass(@Body createFitnessClass: CreateFitnessClass): Call<CreateFitnessClass>
+    fun addClass(@Header ("Authorization") token: String, @Body createFitnessClass: CreateFitnessClass): Call<Void>
 
     @DELETE("classes/{id}")
-    fun deleteClass(@Path("id") classIdPath: Int): Call<Void>
+    fun deleteClass(@Header ("Authorization") token: String, @Path("id") classIdPath: Int): Call<Void>
 
 
 

@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.anywherefitness.R
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
-import com.example.anywherefitness.model.FitnessClassResult
+import com.example.anywherefitness.ui.LoginActivity
 import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
 import kotlinx.android.synthetic.main.fragment_find_classes.*
 
@@ -44,7 +44,15 @@ class FindClassesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val saveToken = activity?.getSharedPreferences(LoginActivity.SAVE_TOKEN, Context.MODE_PRIVATE)
+        val getSavedToken = saveToken?.getString(LoginActivity.GET_SAVE_TOKEN, "default")
+        findClassesViewModel.getList(getSavedToken!!)
+
+
         val list = mutableListOf<FitnessClass>()
+
+
+
 
         rv_find_classes.layoutManager = LinearLayoutManager(context)
         rv_find_classes.adapter = SearchFitnessClassAdapter(list)
@@ -52,10 +60,7 @@ class FindClassesFragment : Fragment() {
         val something = Observer<List<FitnessClass>> {
             list.addAll(it)
             rv_find_classes.adapter?.notifyDataSetChanged()
-
-
         }
-
 
         findClassesViewModel.resultList.observe(this, something)
 

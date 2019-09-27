@@ -4,17 +4,21 @@ import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.anywherefitness.R
 import com.example.anywherefitness.model.User
+import com.example.anywherefitness.ui.StartUpActivity
+import com.example.anywherefitness.ui.client.MyClassesFragment
+import com.example.anywherefitness.viewmodel.LoginViewModel
 
 class InstructorActivity : AppCompatActivity() {
 
     companion object {
-        val userInstructor = User("name", "pass", true, "", false, 1)
+        val INSTRUCTOR_USER = "key"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +47,8 @@ class InstructorActivity : AppCompatActivity() {
                     selectedFragment = CreateClassesFragment()
                 }
                 R.id.navigation_punchcard_instructor -> {
-                    selectedFragment = PunchCardFragment()
+                    //loginModel.logOut(this)
+                    //selectedFragment = PunchCardFragment()
                 }
             }
             selectedFragment?.let { it1 ->

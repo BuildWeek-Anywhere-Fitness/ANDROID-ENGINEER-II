@@ -8,7 +8,7 @@ import java.io.Serializable
 class User (
     val username: String,
     val password: String,
-    val instructor: Boolean = false,
+    val instructor: Int = 0,
     val token: String = "",
     val watchedWalkthrough: Boolean = false,
 

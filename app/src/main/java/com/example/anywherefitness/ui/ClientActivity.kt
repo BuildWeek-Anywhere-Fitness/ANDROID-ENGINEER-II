@@ -1,8 +1,10 @@
 package com.example.anywherefitness.ui
 
+import android.content.Context
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,12 +22,6 @@ class ClientActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_client)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
-        val myClassesFragment = MyClassesFragment()
-        val user = intent.getSerializableExtra(StartUpActivity.USER) as User
-        val bundle = Bundle()
-        bundle.putSerializable("key", user)
-        myClassesFragment.arguments = bundle
 
         val navController = findNavController(R.id.nav_host_fragment_client)
         // Passing each menu ID as a set of Ids because each
