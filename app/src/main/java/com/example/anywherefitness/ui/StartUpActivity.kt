@@ -6,13 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.anywherefitness.App
 import com.example.anywherefitness.R
-import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.User
 import com.example.anywherefitness.ui.Instructor.InstructorActivity
 import com.example.anywherefitness.ui.LoginActivity.Companion.GET_SAVE_TOKEN
 import com.example.anywherefitness.ui.LoginActivity.Companion.SAVE_TOKEN
+import com.example.anywherefitness.ui.client.ClientActivity
 import com.example.anywherefitness.viewmodel.LoginViewModel
 
 class StartUpActivity : AppCompatActivity() {

@@ -3,7 +3,7 @@ package com.example.anywherefitness.Api
 import com.example.anywherefitness.model.CreateUser
 import com.example.anywherefitness.model.FitnessClass
 import com.example.anywherefitness.model.User
-import com.example.anywherefitness.ui.Instructor.CreateFitnessClass
+import com.example.anywherefitness.viewmodel.CreateFitnessClass
 import retrofit2.Call
 import retrofit2.http.*
 

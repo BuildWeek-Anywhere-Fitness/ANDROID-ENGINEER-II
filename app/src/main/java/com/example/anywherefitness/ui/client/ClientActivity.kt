@@ -1,4 +1,4 @@
-package com.example.anywherefitness.ui
+package com.example.anywherefitness.ui.client
 
 import android.content.Context
 import android.content.Intent
@@ -14,8 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.anywherefitness.R
-import com.example.anywherefitness.ui.client.FindClassesFragment
-import com.example.anywherefitness.ui.client.MyClassesFragment
+import com.example.anywherefitness.ui.LoginActivity
 
 class ClientActivity : AppCompatActivity() {
 

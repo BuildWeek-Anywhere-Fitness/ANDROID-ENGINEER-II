@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.anywherefitness.R
 import com.example.anywherefitness.model.User
 import com.example.anywherefitness.ui.LoginActivity
+import com.example.anywherefitness.viewmodel.CreateClassViewModel
+import com.example.anywherefitness.viewmodel.CreateFitnessClass
 import kotlinx.android.synthetic.main.fragment_create_class_instructor.*
 
 class CreateClassesFragment : Fragment() {
@@ -47,7 +49,8 @@ class CreateClassesFragment : Fragment() {
                 et_class_attendees,
                 et_class_size)
 
-            val newCreateClass = CreateFitnessClass(newClass.name ?: "",
+            val newCreateClass = CreateFitnessClass(
+                newClass.name ?: "",
                 newClass.type ?: "",
                 newClass.location ?: "",
                 newClass.duration ?: "",
@@ -55,7 +58,8 @@ class CreateClassesFragment : Fragment() {
                 newClass.max_size.toString(),
                 newClass.starttime,
                 userId,
-                null)
+                null
+            )
 
             val saveToken = activity?.getSharedPreferences(LoginActivity.SAVE_TOKEN, Context.MODE_PRIVATE)
             val getSavedToken = saveToken?.getString(LoginActivity.GET_SAVE_TOKEN, "default")

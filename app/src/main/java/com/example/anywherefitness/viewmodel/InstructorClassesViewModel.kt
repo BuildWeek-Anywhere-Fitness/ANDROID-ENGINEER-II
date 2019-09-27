@@ -1,4 +1,4 @@
-package com.example.anywherefitness.ui.Instructor
+package com.example.anywherefitness.viewmodel
 
 import android.app.Application
 import android.util.Log

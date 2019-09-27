@@ -17,6 +17,7 @@ import com.example.anywherefitness.R
 import com.example.anywherefitness.model.FitnessClass
 import com.example.anywherefitness.model.User
 import com.example.anywherefitness.ui.LoginActivity
+import com.example.anywherefitness.viewmodel.InstructorClassesViewModel
 import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
 import kotlinx.android.synthetic.main.fragment_classes_instructor.*
 

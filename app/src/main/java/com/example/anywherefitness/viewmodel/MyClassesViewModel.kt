@@ -1,4 +1,4 @@
-package com.example.anywherefitness.ui.client
+package com.example.anywherefitness.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
