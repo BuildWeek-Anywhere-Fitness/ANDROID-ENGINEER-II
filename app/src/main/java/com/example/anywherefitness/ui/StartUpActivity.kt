@@ -17,8 +17,6 @@ import com.example.anywherefitness.viewmodel.LoginViewModel
 
 class StartUpActivity : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start_up)
@@ -30,11 +28,6 @@ class StartUpActivity : AppCompatActivity() {
 
             if (it != null){
                 loginModel.setUser(it)
-
-                /*val isInstructor = when(it.instructor){
-                    1 -> true
-                    else -> false
-                }*/
 
                 val intent = when(it.instructor){
                     true -> {
@@ -52,7 +45,6 @@ class StartUpActivity : AppCompatActivity() {
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
-
         }
 
         if (getSavedToken != "default") {
@@ -64,7 +56,5 @@ class StartUpActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
-
-
     }
 }

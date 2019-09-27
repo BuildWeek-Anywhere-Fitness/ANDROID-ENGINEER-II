@@ -13,14 +13,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.anywherefitness.App
 import com.example.anywherefitness.R
-import com.example.anywherefitness.model.User
 import com.example.anywherefitness.ui.client.FindClassesFragment
 import com.example.anywherefitness.ui.client.MyClassesFragment
 
 class ClientActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +35,6 @@ class ClientActivity : AppCompatActivity() {
             )
         )
 
-        //App.repo?.deleteAllClasses()
         setupActionBarWithNavController(navController)
         navView.setupWithNavController(navController)
 
@@ -55,12 +51,6 @@ class ClientActivity : AppCompatActivity() {
                 }
             }
             selectedFragment?.let { it1 ->
-                /*val fragmentBundle = Bundle()
-                fragmentBundle.putSerializable(
-                    //FRAGMENT_KEY,
-                    //put extras if needed here
-                )*/
-                //selectedFragment.arguments = fragmentBundle
                 supportFragmentManager.beginTransaction().replace(
                     R.id.nav_host_fragment_client,
                     it1
@@ -86,6 +76,4 @@ class ClientActivity : AppCompatActivity() {
         finish()
         return super.onOptionsItemSelected(item)
     }
-
-
 }

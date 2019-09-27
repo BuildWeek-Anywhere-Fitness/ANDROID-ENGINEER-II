@@ -1,7 +1,6 @@
 package com.example.anywherefitness.ui.Instructor
 
 import android.app.Application
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -11,7 +10,6 @@ import com.example.anywherefitness.App
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
 import com.example.anywherefitness.model.User
-import kotlinx.android.synthetic.main.fragment_classes_instructor.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,14 +25,6 @@ class InstructorClassesViewModel(application: Application) : AndroidViewModel(ap
     }
     
     val text: LiveData<String> = _text
-
-    /*fun delete(fitnessClass: FitnessClass) {
-        App.repo?.delete(fitnessClass)
-    }
-
-    fun deleteClassById(classId: Int) {
-        repo.deleteClassById(classId)
-    }*/
 
     fun insert(fitnessClass: FitnessClass) {
         App.repo?.insert(fitnessClass)

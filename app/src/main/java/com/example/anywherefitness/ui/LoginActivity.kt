@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.anywherefitness.viewmodel.LoginViewModel
 import com.example.anywherefitness.R
 import com.example.anywherefitness.model.User
-import com.example.anywherefitness.ui.Instructor.InstructorActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -22,8 +21,6 @@ class LoginActivity : AppCompatActivity() {
         val SAVE_TOKEN = "saved preference"
         val GET_SAVE_TOKEN = "token"
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,5 +69,4 @@ class LoginActivity : AppCompatActivity() {
 
         }
     }
-
 }

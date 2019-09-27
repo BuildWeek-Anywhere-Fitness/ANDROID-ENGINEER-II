@@ -22,18 +22,11 @@ class WalkthroughActivity : AppCompatActivity() {
         var user: User? = null
         val userObserver = Observer<User> {
             user = it
-
         }
 
         waltthroughlModel.getUser()?.observe(this, userObserver)
-
         userObserver.onChanged(waltthroughlModel.getUser()?.value)
 
-        /*val isInstructor = when(int){
-            1 -> true
-            else -> false
-        }
-*/
         val intent = if (user!!.instructor) {
             tv_walkthrough.text = "Create a class for clients to join"
             Intent(this, InstructorActivity::class.java)
@@ -41,10 +34,6 @@ class WalkthroughActivity : AppCompatActivity() {
             tv_walkthrough.text = "Join a class by clicking on it and the same to delete it from your saved"
             Intent(this, ClientActivity::class.java)
         }
-
-
-
-
 
         btn_skip.setOnClickListener {
             startActivity(intent)

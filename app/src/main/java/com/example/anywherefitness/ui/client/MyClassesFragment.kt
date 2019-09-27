@@ -85,9 +85,7 @@ class MyClassesFragment : Fragment() {
                 dialog.show()
                 true
             }
-
         }
-
 
         inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
             val fitnessClassName: TextView = view.tv_class_name

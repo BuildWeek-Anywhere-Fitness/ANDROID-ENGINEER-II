@@ -3,29 +3,22 @@ package com.example.anywherefitness.ui.Instructor
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.anywherefitness.Api.UserApiBuilder
 import com.example.anywherefitness.R
-import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
 import com.example.anywherefitness.model.User
 import com.example.anywherefitness.ui.LoginActivity
 import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
 import kotlinx.android.synthetic.main.fragment_classes_instructor.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class InstructorClassesFragment : Fragment() {
 

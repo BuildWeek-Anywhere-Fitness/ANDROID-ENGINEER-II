@@ -41,9 +41,9 @@ class FindClassesViewModel(application: Application) : AndroidViewModel(applicat
         })
     }
 
-     fun getUser(): LiveData<User>?{
+     /*fun getUser(): LiveData<User>?{
          return App.repo?.getUser()
-     }
+     }*/
 
 
 }

@@ -2,7 +2,6 @@ package com.example.anywherefitness.database
 
 import androidx.room.*
 import com.example.anywherefitness.model.FitnessClass
-import com.example.anywherefitness.model.User
 
 @Dao
 interface UserDao {
