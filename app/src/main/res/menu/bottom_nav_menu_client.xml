@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/navigation_my_classes"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_list_black_24dp"
         android:title="@string/title_my_classes" />
 
     <item
         android:id="@+id/navigation_find_classes"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_search_black_24dp"
         android:title="@string/title_find_classes" />
 
 </menu>

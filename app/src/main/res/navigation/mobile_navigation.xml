@@ -17,9 +17,9 @@
         android:label="@string/title_create_class_instructor"
         tools:layout="@layout/fragment_classes_instructor" />
 
-    <fragment
+    <!--<fragment
         android:id="@+id/navigation_punchcard_instructor"
         android:name="com.example.anywherefitness.ui.Instructor.PunchCardFragment"
         android:label="@string/title_punchcard_isntructor"
-        tools:layout="@layout/fragment_punchcard_instructor" />
+        tools:layout="@layout/fragment_punchcard_instructor" />-->
 </navigation>

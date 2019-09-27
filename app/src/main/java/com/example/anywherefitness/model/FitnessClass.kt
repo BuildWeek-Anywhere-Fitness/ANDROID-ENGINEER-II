@@ -5,17 +5,16 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "class_table")
 class FitnessClass (
-    val name: String,
-    val type: String,
-    val startTime: String,
-    val duration: Int,
-    val intensity: Int,
-    val location: String,
-    val instructor_id: Int,
-    val instructor: Boolean,
-    val numberOfAttendees: Int,
-    val classSize: Int,
+    val name: String? = "",
+    val type: String? = "",
+    val starttime: String? = "",
+    val duration: String? = "",
+    val intensity: String? = "",
+    val location: String? = "",
+    val instructor_id: Int?,
+    val numberOfAttendees: Int? = 0,
+    val max_size: Int?,
 
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 )

@@ -21,5 +21,6 @@
     <string name="title_my_classes_instructor">My Classes</string>
     <string name="title_create_class_instructor">Create Class</string>
     <string name="title_punchcard_isntructor">Punchcard</string>
+    <string name="log_out">Log out</string>
 
 </resources>
