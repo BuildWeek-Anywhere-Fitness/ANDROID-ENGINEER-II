@@ -18,7 +18,7 @@ class LoginActivity : AppCompatActivity() {
 
     companion object {
         val REGISTER_CODE = 210
-        val SAVE_TOKEN = "saved preference98699768798799608088086989869"
+        val SAVE_TOKEN = "saved preference"
         val GET_SAVE_TOKEN = "token"
     }
 
@@ -48,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
 
         val userObserver = Observer<User> {
             val intent = Intent(this, WalkthroughActivity::class.java)
+            loginModel.setUser(it)
             startActivity(intent)
             finish()
         }

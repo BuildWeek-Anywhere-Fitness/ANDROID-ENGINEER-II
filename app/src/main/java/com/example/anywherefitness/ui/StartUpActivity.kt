@@ -50,6 +50,7 @@ class StartUpActivity : AppCompatActivity() {
             }
             else {
                 startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
 
         }
@@ -61,6 +62,7 @@ class StartUpActivity : AppCompatActivity() {
             loginModel.currentUser.observe(this, userObserver)
         } else {
             startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
 
 
