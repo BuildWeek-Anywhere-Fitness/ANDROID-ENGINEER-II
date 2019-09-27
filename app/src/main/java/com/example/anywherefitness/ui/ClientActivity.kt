@@ -38,7 +38,7 @@ class ClientActivity : AppCompatActivity() {
             )
         )
 
-        App.repo?.deleteAllClasses()
+        //App.repo?.deleteAllClasses()
         setupActionBarWithNavController(navController)
         navView.setupWithNavController(navController)
 
