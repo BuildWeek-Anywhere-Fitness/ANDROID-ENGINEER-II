@@ -47,10 +47,12 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val userObserver = Observer<User> {
-            val intent = Intent(this, WalkthroughActivity::class.java)
-            loginModel.setUser(it)
-            startActivity(intent)
-            finish()
+            if (it != null){
+                val intent = Intent(this, WalkthroughActivity::class.java)
+                loginModel.setUser(it)
+                startActivity(intent)
+                finish()
+            }
         }
 
         btn_register.setOnClickListener {

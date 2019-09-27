@@ -31,12 +31,12 @@ class StartUpActivity : AppCompatActivity() {
             if (it != null){
                 loginModel.setUser(it)
 
-                val isInstructor = when(it.instructor){
+                /*val isInstructor = when(it.instructor){
                     1 -> true
                     else -> false
-                }
+                }*/
 
-                val intent = when(isInstructor){
+                val intent = when(it.instructor){
                     true -> {
                         Intent(this, InstructorActivity::class.java)
                     }

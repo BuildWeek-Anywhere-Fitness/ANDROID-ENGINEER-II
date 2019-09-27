@@ -1,8 +1,13 @@
 package com.example.anywherefitness.ui.Instructor
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -11,6 +16,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.anywherefitness.R
 import com.example.anywherefitness.model.User
+import com.example.anywherefitness.ui.LoginActivity
 import com.example.anywherefitness.ui.StartUpActivity
 import com.example.anywherefitness.ui.client.MyClassesFragment
 import com.example.anywherefitness.viewmodel.LoginViewModel
@@ -61,5 +67,21 @@ class InstructorActivity : AppCompatActivity() {
             }
             true
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.log_out_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val saveToken = getSharedPreferences(LoginActivity.SAVE_TOKEN, Context.MODE_PRIVATE)
+        saveToken.edit{
+            clear()
+        }
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
+        return super.onOptionsItemSelected(item)
     }
 }

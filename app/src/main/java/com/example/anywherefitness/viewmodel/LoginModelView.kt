@@ -52,13 +52,17 @@ class LoginViewModel : ViewModel(){
         val getId = stringToJSON.get("id").toString().toInt()
         UserApiBuilder.userRetro().getUserById(getId).enqueue(object: Callback<User>{
             override fun onFailure(call: Call<User>, t: Throwable) {
+                val i = t
                 currentUser.value = null
             }
 
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful){
                     currentUser.value = response.body()
-                } else currentUser.value = null
+                } else {
+                    val i = response
+                    currentUser.value = null
+                }
             }
 
         })
