@@ -35,7 +35,7 @@ class ClientActivity : AppCompatActivity() {
                 R.id.navigation_find_classes
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        setupActionBarWithNavController(navController)
         navView.setupWithNavController(navController)
 
         navView.setOnNavigationItemSelectedListener {

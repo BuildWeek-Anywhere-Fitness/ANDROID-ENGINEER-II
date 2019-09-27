@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.anywherefitness.R
@@ -51,6 +52,8 @@ class RegisterActivity : AppCompatActivity() {
             if (password == confirmPassword && username.isNotEmpty() && password.isNotEmpty()){
                 registerViewModel.createUser(user)
                 registerViewModel.isSuccessful.observe(this, observer)
+            } else{
+                Toast.makeText(this, "Please insert a valid username or password", Toast.LENGTH_SHORT).show()
             }
 
 
@@ -60,7 +63,8 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
+        val backIntent = Intent()
+        setResult(Activity.RESULT_CANCELED, backIntent)
         finish()
-        exitProcess(0)
     }
 }
