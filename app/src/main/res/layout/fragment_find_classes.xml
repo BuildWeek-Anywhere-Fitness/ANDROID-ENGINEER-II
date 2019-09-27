@@ -6,26 +6,9 @@
     android:clickable="true"
     android:background="@android:color/white">
 
-    <LinearLayout
-        android:id="@+id/ll_find_classes"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-
-        <SearchView
-            android:id="@+id/sv_find"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-
-    </LinearLayout>
-
     <TextView
         android:id="@+id/text_notifications"
-        android:text="FIND CLASSES HERE"
+        android:text="Search for Classes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -35,12 +18,26 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_find_classes" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_find_classes"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_notifications">
+
+        <SearchView
+            android:id="@+id/sv_find"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_find_classes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/text_notifications"/>
+        app:layout_constraintTop_toBottomOf="@+id/ll_find_classes"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
