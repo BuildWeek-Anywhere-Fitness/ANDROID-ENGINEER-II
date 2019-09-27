@@ -1,6 +1,7 @@
 package com.example.anywherefitness.ui.Instructor
 
 import android.app.Application
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -19,64 +20,81 @@ class InstructorClassesViewModel(application: Application) : AndroidViewModel(ap
 
     var repo = UserRepo(application)
     var instructorFitnessClassList: MutableList<FitnessClass> = repo.getAllFitnessClasss()
+    val list = MutableLiveData<List<FitnessClass>>()
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "My Classes"
     }
-
     
     val text: LiveData<String> = _text
 
-    fun delete(fitnessClass: FitnessClass) {
+    /*fun delete(fitnessClass: FitnessClass) {
         App.repo?.delete(fitnessClass)
     }
 
     fun deleteClassById(classId: Int) {
         repo.deleteClassById(classId)
-    }
+    }*/
 
     fun insert(fitnessClass: FitnessClass) {
-        repo.insert(fitnessClass)
+        App.repo?.insert(fitnessClass)
     }
 
     fun deleteAllClasses() {
-        repo.deleteAllClasses()
+        App.repo?.deleteAllClasses()
     }
 
-    //TODO: add api call to get all classes for this instructor
-    /*fun getAllInstructorClasses(): MutableList<FitnessClass> {
-        var fitnessClassInstructorList = mutableListOf<FitnessClass>()
-        UserApiBuilder.userRetro().getAllClasses().enqueue(object : Callback<List<FitnessClass>> {
-            override fun onFailure(call: Call<List<FitnessClass>>, t: Throwable) {
-                Log.i("BIGBRAIN", "onFailure $t")
-            }
-
-            override fun onResponse(
-                call: Call<List<FitnessClass>>,
-                response: Response<List<FitnessClass>>
-            ) {
-                if (response.isSuccessful) {
-                    Log.i("BIGBRAIN", "onReponse ${response.body()?.size}")
-                    deleteAllClasses()
-                    fitnessClassInstructorList = response.body()!!.toMutableList()
-                    for (i in 0 until fitnessClassInstructorList.size) {
-                        if (fitnessClassInstructorList[i].instructor_id == 11) {
-                            insert(fitnessClassInstructorList[i])
-                        }
-                    }
-                    fitnessClassInstructorList = getAllClasses()
-                    //rv_instructor_classes.adapter?.notifyDataSetChanged()
-                } else {
-                    Log.i("BIGBRAIN", "onReponse failure $response")
+    fun getClassList(getSavedToken: String?, userId: Int) {
+        UserApiBuilder.userRetro().getAllClasses(getSavedToken!!)
+            .enqueue(object : Callback<List<FitnessClass>> {
+                override fun onFailure(call: Call<List<FitnessClass>>, t: Throwable) {
+                    Log.i("BIGBRAIN", "onFailure $t")
                 }
-            }
 
-        })
-        return
-    }*/
+                override fun onResponse(
+                    call: Call<List<FitnessClass>>,
+                    response: Response<List<FitnessClass>>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.i("BIGBRAIN", "onReponse ${response.body()?.size}")
+                        deleteAllClasses()
+                        instructorFitnessClassList = response.body()!!.toMutableList()
+                        for (i in 0 until instructorFitnessClassList.size) {
+                            if (instructorFitnessClassList[i].instructor_id == userId) {
+                                insert(instructorFitnessClassList[i])
+                            }
+                        }
+                        instructorFitnessClassList = getAllClasses()
+                        list.value = instructorFitnessClassList
+                    } else {
+                        Log.i("BIGBRAIN", "onReponse failure $response")
+                    }
+                }
+            })
+    }
+
+    fun deleteClass(id: Int, getSavedToken: String?, position: Int) {
+        UserApiBuilder.userRetro().deleteClass(getSavedToken!!, id)
+            .enqueue(object : Callback<Void> {
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.i("BIGBRAIN", "onFailure $t")
+                }
+
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        App.repo?.deleteClassById(id)
+                        instructorFitnessClassList?.removeAt(position)
+                        list.value = instructorFitnessClassList
+                        Log.i("BIGBRAIN", "reponse success $response")
+                    } else {
+                        Log.i("BIGBRAIN", "reponse failed $response")
+                    }
+                }
+            })
+    }
 
     fun getAllClasses(): MutableList<FitnessClass> {
-        val instructorFitnessClassList: MutableList<FitnessClass> = repo.getAllFitnessClasss()
+        val instructorFitnessClassList: MutableList<FitnessClass> = App.repo?.getAllFitnessClasss() ?: mutableListOf()
         return instructorFitnessClassList
     }
 

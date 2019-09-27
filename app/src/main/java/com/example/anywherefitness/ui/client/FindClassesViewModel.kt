@@ -16,7 +16,7 @@ import retrofit2.Response
 class FindClassesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Find Classes Fragment"
+        value = "Search for Classes"
     }
     val text: LiveData<String> = _text
 
