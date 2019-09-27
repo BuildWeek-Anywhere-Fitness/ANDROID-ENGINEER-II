@@ -31,7 +31,7 @@ class InstructorActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_classes_instructor, R.id.navigation_create_class_instructor, R.id.navigation_punchcard_instructor
+                R.id.navigation_classes_instructor, R.id.navigation_create_class_instructor
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -45,10 +45,6 @@ class InstructorActivity : AppCompatActivity() {
                 }
                 R.id.navigation_create_class_instructor -> {
                     selectedFragment = CreateClassesFragment()
-                }
-                R.id.navigation_punchcard_instructor -> {
-                    //loginModel.logOut(this)
-                    //selectedFragment = PunchCardFragment()
                 }
             }
             selectedFragment?.let { it1 ->

@@ -11,9 +11,9 @@
         android:icon="@drawable/ic_playlist_add_black_24dp"
         android:title="@string/title_create_class_instructor" />
 
-    <item
+    <!--<item
         android:id="@+id/navigation_punchcard_instructor"
         android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_punchcard_isntructor" />
+        android:title="@string/title_punchcard_isntructor" />-->
 
 </menu>
