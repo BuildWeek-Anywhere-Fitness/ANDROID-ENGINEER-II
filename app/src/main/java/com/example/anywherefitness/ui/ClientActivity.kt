@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.anywherefitness.App
 import com.example.anywherefitness.R
 import com.example.anywherefitness.model.User
 import com.example.anywherefitness.ui.client.FindClassesFragment
@@ -25,6 +26,7 @@ class ClientActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_client)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        title = "My Classes"
 
         val navController = findNavController(R.id.nav_host_fragment_client)
         // Passing each menu ID as a set of Ids because each
@@ -35,6 +37,8 @@ class ClientActivity : AppCompatActivity() {
                 R.id.navigation_find_classes
             )
         )
+
+        App.repo?.deleteAllClasses()
         setupActionBarWithNavController(navController)
         navView.setupWithNavController(navController)
 
@@ -43,9 +47,11 @@ class ClientActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.navigation_find_classes -> {
                     selectedFragment = FindClassesFragment()
+                    title = "Find Classes"
                 }
                 R.id.navigation_my_classes -> {
                     selectedFragment = MyClassesFragment()
+                    title = "My Classes"
                 }
             }
             selectedFragment?.let { it1 ->

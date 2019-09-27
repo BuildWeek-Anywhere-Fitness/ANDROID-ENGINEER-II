@@ -10,7 +10,7 @@ import com.example.anywherefitness.model.FitnessClass
 class MyClassesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "My Classes Fragment"
+        value = "My Classes"
     }
     val text: LiveData<String> = _text
     val repo = UserRepo(application)

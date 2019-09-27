@@ -32,10 +32,7 @@ class CreateClassesFragment : Fragment() {
         createClassViewModel =
             ViewModelProviders.of(this).get(CreateClassViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_create_class_instructor, container, false)
-        val textView: TextView = root.findViewById(R.id.text_create_class_instructor)
-        createClassViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+
         return root
     }
 

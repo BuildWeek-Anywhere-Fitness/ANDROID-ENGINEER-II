@@ -17,16 +17,10 @@ import kotlin.system.exitProcess
 
 class RegisterActivity : AppCompatActivity() {
 
-
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-
-
+        title = "Register"
 
         val registerViewModel = ViewModelProviders.of(this).get(RegisterViewModel::class.java)
         val observer = Observer<Boolean>{
@@ -35,7 +29,6 @@ class RegisterActivity : AppCompatActivity() {
                 finish()
             }
         }
-
 
         btn_register.setOnClickListener {
             val username = et_register_username.text.toString()
@@ -55,10 +48,7 @@ class RegisterActivity : AppCompatActivity() {
             } else{
                 Toast.makeText(this, "Please insert a valid username or password", Toast.LENGTH_SHORT).show()
             }
-
-
         }
-
     }
 
     override fun onBackPressed() {

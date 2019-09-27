@@ -32,10 +32,6 @@ class MyClassesFragment : Fragment() {
         myClassesViewModel =
             ViewModelProviders.of(this).get(MyClassesViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_my_classes, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        myClassesViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
         return root
     }
 

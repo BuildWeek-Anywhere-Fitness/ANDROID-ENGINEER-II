@@ -48,18 +48,15 @@ class InstructorActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.navigation_classes_instructor -> {
                     selectedFragment = InstructorClassesFragment()
+                    title = "My Classes"
                 }
                 R.id.navigation_create_class_instructor -> {
                     selectedFragment = CreateClassesFragment()
+                    title = "Create Class"
                 }
             }
             selectedFragment?.let { it1 ->
-                /*val fragmentBundle = Bundle()
-                fragmentBundle.putSerializable(
-                    //FRAGMENT_KEY,
-                    //put extras if needed here
-                )*/
-                //selectedFragment.arguments = fragmentBundle
+
                 supportFragmentManager.beginTransaction().replace(
                     R.id.nav_host_fragment_instructor,
                     it1

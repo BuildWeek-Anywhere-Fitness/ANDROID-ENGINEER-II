@@ -16,6 +16,7 @@ class WalkthroughActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_walkthrough)
+        title = "Walkthrough"
 
         val waltthroughlModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         var user: User? = null

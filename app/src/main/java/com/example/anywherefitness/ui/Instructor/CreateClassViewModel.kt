@@ -18,7 +18,7 @@ class CreateClassViewModel(application: Application) : AndroidViewModel(applicat
     private var repo: UserRepo = UserRepo(application)
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "Create Class"
     }
     val text: LiveData<String> = _text
 

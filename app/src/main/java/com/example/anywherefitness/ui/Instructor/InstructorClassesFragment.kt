@@ -30,7 +30,7 @@ import retrofit2.Response
 class InstructorClassesFragment : Fragment() {
 
     private lateinit var instructorClassesViewModel: InstructorClassesViewModel
-    private lateinit var fitnessClassList : MutableList<FitnessClass>
+    private var fitnessClassList : MutableList<FitnessClass>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,49 +40,32 @@ class InstructorClassesFragment : Fragment() {
         instructorClassesViewModel =
             ViewModelProviders.of(this).get(InstructorClassesViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_classes_instructor, container, false)
-        val textView: TextView = root.findViewById(R.id.text_classes_instructor)
-        instructorClassesViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        fitnessClassList = mutableListOf()
         val saveToken = activity?.getSharedPreferences(LoginActivity.SAVE_TOKEN, Context.MODE_PRIVATE)
         val getSavedToken = saveToken?.getString(LoginActivity.GET_SAVE_TOKEN, "default")
 
         var userId = 0
         val userObserver = Observer<User> {userId = it.id}
+        userObserver.onChanged(instructorClassesViewModel.getUser()?.value)
         instructorClassesViewModel.getUser()?.observe(this, userObserver)
 
-        //TODO: put this in view model, remove magic number for instructor id
-        //calling all classes here and then filtering for the correct instructor_id because when a class is posted it does not
-        //return the class_id, so we can't save it in the database correctly
-        UserApiBuilder.userRetro().getAllClasses(getSavedToken!!).enqueue(object: Callback<List<FitnessClass>> {
-            override fun onFailure(call: Call<List<FitnessClass>>, t: Throwable) {
-                Log.i("BIGBRAIN", "onFailure $t")
-            }
+        instructorClassesViewModel.getClassList(getSavedToken, userId)
 
-            override fun onResponse(call: Call<List<FitnessClass>>, response: Response<List<FitnessClass>>) {
-                if (response.isSuccessful) {
-                    Log.i("BIGBRAIN", "onReponse ${response.body()?.size}")
-                    instructorClassesViewModel.deleteAllClasses()
-                    fitnessClassList = response.body()!!.toMutableList()
-                    for (i in 0 until fitnessClassList.size) {
-                        if (fitnessClassList[i].instructor_id == userId) {
-                            instructorClassesViewModel.insert(fitnessClassList[i])
-                        }
-                    }
-                    fitnessClassList = instructorClassesViewModel.getAllClasses()
-                    rv_instructor_classes.adapter?.notifyDataSetChanged()
-                } else {
-                    Log.i("BIGBRAIN", "onReponse failure $response")
-                }
+        val listObserver = Observer<List<FitnessClass>> {
+            if(it != null) {
+            fitnessClassList?.clear()
+            fitnessClassList?.addAll(it)
+            rv_instructor_classes.adapter?.notifyDataSetChanged()
             }
-
-        })
+        }
+        instructorClassesViewModel.list.observe(this, listObserver)
+        listObserver.onChanged(instructorClassesViewModel.list.value)
 
         fitnessClassList = instructorClassesViewModel.getAllClasses()
         rv_instructor_classes.apply {
@@ -92,29 +75,28 @@ class InstructorClassesFragment : Fragment() {
         }
     }
 
-    inner class FitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>): RecyclerView.Adapter<FitnessClassAdapter.ViewHolder>() {
+    inner class FitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>?): RecyclerView.Adapter<FitnessClassAdapter.ViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.fitness_class_list_view, parent, false) as View)
         }
 
         override fun getItemCount(): Int {
-            return fitnessClassList.size
+            return fitnessClassList?.size ?: 0
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val fitnessClass = fitnessClassList[position]
-            holder.fitnessClassName.text = fitnessClass.name
-            holder.fitnessClassType.text = fitnessClass.type
-            holder.fitnessClassTime.text = fitnessClass.starttime
-            holder.fitnessClassDuration.text = fitnessClass.duration.toString()
-            holder.fitnessClassIntensity.text = fitnessClass.intensity.toString()
-            holder.fitnessClassLocation.text = fitnessClass.location
-            holder.fitnessClassAttendees.text = fitnessClass.numberOfAttendees.toString()
-            holder.fitnessClassMaxSize.text = fitnessClass.max_size.toString()
-            holder.fitnessClassId.text = fitnessClass.id.toString()
+            val fitnessClass = fitnessClassList?.get(position)
+            holder.fitnessClassName.text = fitnessClass?.name
+            holder.fitnessClassType.text = fitnessClass?.type
+            holder.fitnessClassTime.text = fitnessClass?.starttime
+            holder.fitnessClassDuration.text = fitnessClass?.duration.toString()
+            holder.fitnessClassIntensity.text = fitnessClass?.intensity.toString()
+            holder.fitnessClassLocation.text = fitnessClass?.location
+            holder.fitnessClassAttendees.text = fitnessClass?.numberOfAttendees.toString()
+            holder.fitnessClassMaxSize.text = fitnessClass?.max_size.toString()
+            holder.fitnessClassId.text = fitnessClass?.id.toString()
             holder.fitnessClassParent.setOnLongClickListener {
-
 
                 val saveToken = activity?.getSharedPreferences(LoginActivity.SAVE_TOKEN, Context.MODE_PRIVATE)
                 val getSavedToken = saveToken?.getString(LoginActivity.GET_SAVE_TOKEN, "default")
@@ -123,23 +105,7 @@ class InstructorClassesFragment : Fragment() {
                 builder.setTitle("Delete Class")
                 builder.setMessage("Are you sure you want to delete this class?")
                 builder.setPositiveButton("YES"){dialog, which ->
-                    UserApiBuilder.userRetro().deleteClass(getSavedToken!!, fitnessClass.id).enqueue(object: Callback<Void> {
-                        override fun onFailure(call: Call<Void>, t: Throwable) {
-                            Log.i("BIGBRAIN", "onFailure $t")
-                        }
-
-                        override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                            if (response.isSuccessful) {
-                                instructorClassesViewModel.repo.deleteClassById(fitnessClass.id)
-                                fitnessClassList.removeAt(position)
-                                notifyDataSetChanged()
-                                Log.i("BIGBRAIN", "reponse success $response")
-                            } else {
-                                Log.i("BIGBRAIN", "reponse failed $response")
-                            }
-                        }
-
-                    })
+                    instructorClassesViewModel.deleteClass(fitnessClass!!.id, getSavedToken, position)
                 }
                 builder.setNegativeButton("NO"){_, _ ->}
 
@@ -147,9 +113,7 @@ class InstructorClassesFragment : Fragment() {
                 dialog.show()
                 true
             }
-
         }
-
 
         inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
             val fitnessClassName: TextView = view.tv_class_name
