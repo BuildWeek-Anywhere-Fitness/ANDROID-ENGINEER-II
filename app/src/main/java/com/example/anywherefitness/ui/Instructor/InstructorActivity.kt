@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.anywherefitness.App
 import com.example.anywherefitness.R
 import com.example.anywherefitness.model.User
 import com.example.anywherefitness.ui.LoginActivity
@@ -80,5 +81,10 @@ class InstructorActivity : AppCompatActivity() {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        App.repo?.deleteAllClasses()
     }
 }
