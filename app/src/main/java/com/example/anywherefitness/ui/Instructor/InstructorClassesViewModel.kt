@@ -43,6 +43,36 @@ class InstructorClassesViewModel(application: Application) : AndroidViewModel(ap
         repo.deleteAllClasses()
     }
 
+    fun getClassList(getSavedToken: String?, userId: Int) {
+        UserApiBuilder.userRetro().getAllClasses(getSavedToken!!)
+            .enqueue(object : Callback<List<FitnessClass>> {
+                override fun onFailure(call: Call<List<FitnessClass>>, t: Throwable) {
+                    Log.i("BIGBRAIN", "onFailure $t")
+                }
+
+                override fun onResponse(
+                    call: Call<List<FitnessClass>>,
+                    response: Response<List<FitnessClass>>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.i("BIGBRAIN", "onReponse ${response.body()?.size}")
+                        deleteAllClasses()
+                        instructorFitnessClassList = response.body()!!.toMutableList()
+                        for (i in 0 until instructorFitnessClassList.size) {
+                            if (instructorFitnessClassList[i].instructor_id == userId) {
+                                insert(instructorFitnessClassList[i])
+                            }
+                        }
+                        instructorFitnessClassList = getAllClasses()
+                        //rv_instructor_classes.adapter?.notifyDataSetChanged()
+                    } else {
+                        Log.i("BIGBRAIN", "onReponse failure $response")
+                    }
+                }
+
+            })
+    }
+
     //TODO: add api call to get all classes for this instructor
     /*fun getAllInstructorClasses(): MutableList<FitnessClass> {
         var fitnessClassInstructorList = mutableListOf<FitnessClass>()
