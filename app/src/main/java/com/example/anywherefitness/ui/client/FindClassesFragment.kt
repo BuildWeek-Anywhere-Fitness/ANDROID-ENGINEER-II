@@ -19,6 +19,7 @@ import com.example.anywherefitness.R
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
 import com.example.anywherefitness.ui.LoginActivity
+import com.example.anywherefitness.viewmodel.FindClassesViewModel
 import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
 import kotlinx.android.synthetic.main.fragment_find_classes.*
 
@@ -45,24 +46,17 @@ class FindClassesFragment : Fragment() {
         val getSavedToken = saveToken?.getString(LoginActivity.GET_SAVE_TOKEN, "default")
         findClassesViewModel.getList(getSavedToken!!)
 
-
         val list = mutableListOf<FitnessClass>()
-
-
-
 
         rv_find_classes.layoutManager = LinearLayoutManager(context)
         rv_find_classes.adapter = SearchFitnessClassAdapter(list)
 
         val something = Observer<List<FitnessClass>> {
             list.addAll(it)
-            list.add(it[it.size - 1])
             rv_find_classes.adapter?.notifyDataSetChanged()
         }
         
         findClassesViewModel.resultList.observe(this, something)
-
-        //something.onChanged(findClassesViewModel.resultList.value)
 
         sv_find.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             val newList = mutableListOf<FitnessClass>()
@@ -89,16 +83,9 @@ class FindClassesFragment : Fragment() {
                 if (p0.isNullOrBlank()){
                     rv_find_classes.adapter?.notifyDataSetChanged()
                 }
-
-
                 return true
             }
-
         })
-        
-
-
-
     }
 
     inner class SearchFitnessClassAdapter (val fitnessClassList: MutableList<FitnessClass>):
@@ -141,7 +128,6 @@ class FindClassesFragment : Fragment() {
             }
         }
 
-
         inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
             val fitnessClassName: TextView = view.tv_class_name
             val fitnessClassType: TextView = view.tv_class_type
@@ -155,8 +141,4 @@ class FindClassesFragment : Fragment() {
             val fitnessClassId: TextView = view.tv_class_id
         }
     }
-
-
-
-
 }

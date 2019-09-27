@@ -14,6 +14,11 @@ class UserRepo (context: Context) {
 
     private  var userLiveData = MutableLiveData<User>()
 
+    init {
+        val database: UserDatabase = UserDatabase.getInstance(context)!!
+        userDao = database.userDao()
+    }
+
     fun getUser(): LiveData<User> {
         return userLiveData
     }
@@ -22,21 +27,8 @@ class UserRepo (context: Context) {
         userLiveData.value = user
     }
 
-    init {
-        val database: UserDatabase = UserDatabase.getInstance(context)!!
-        userDao = database.userDao()
-    }
-
     fun insert(fitnessClass: FitnessClass) {
         InsertFitnessClassAsyncTask(userDao).execute(fitnessClass)
-    }
-
-    fun update(fitnessClass: FitnessClass) {
-        UpdateFitnessClassAsyncTask(userDao).execute(fitnessClass)
-    }
-
-    fun delete(fitnessClass: FitnessClass) {
-        DeleteFitnessClassAsyncTask(userDao).execute(fitnessClass)
     }
 
     fun deleteClassById(classId: Int) {
@@ -62,7 +54,7 @@ class UserRepo (context: Context) {
             }
         }
 
-        private class UpdateFitnessClassAsyncTask(userDao: UserDao) : AsyncTask<FitnessClass, Unit, Unit>() {
+        /*private class UpdateFitnessClassAsyncTask(userDao: UserDao) : AsyncTask<FitnessClass, Unit, Unit>() {
             val UserDao = userDao
 
             override fun doInBackground(vararg p0: FitnessClass?) {
@@ -76,7 +68,7 @@ class UserRepo (context: Context) {
             override fun doInBackground(vararg p0: FitnessClass?) {
                 UserDao.delete(p0[0]!!)
             }
-        }
+        }*/
 
         private class DeleteFitnessClassByIdAsyncTask(userDao: UserDao) : AsyncTask<Int, Unit, Unit>() {
             val UserDao = userDao

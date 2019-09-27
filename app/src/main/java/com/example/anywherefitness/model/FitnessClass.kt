@@ -18,5 +18,3 @@ class FitnessClass (
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 )
-
-class FitnessClassResult (val result: MutableList<FitnessClass>)

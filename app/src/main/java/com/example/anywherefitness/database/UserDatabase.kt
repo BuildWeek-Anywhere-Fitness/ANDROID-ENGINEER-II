@@ -27,7 +27,7 @@ abstract class UserDatabase : RoomDatabase() {
                         .build()
                 }
             }
-            return instance //as MovieDatabase
+            return instance
         }
     }
 }

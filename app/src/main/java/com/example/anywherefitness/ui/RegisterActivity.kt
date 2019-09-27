@@ -9,11 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.anywherefitness.R
 import com.example.anywherefitness.model.CreateUser
-import com.example.anywherefitness.model.User
-import com.example.anywherefitness.viewmodel.LoginViewModel
 import com.example.anywherefitness.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlin.system.exitProcess
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -35,11 +32,6 @@ class RegisterActivity : AppCompatActivity() {
             val password = et_register_password.text.toString()
             val confirmPassword = et_confirm_password.text.toString()
             val isInstructor = checkbox_instructor.isChecked
-            /*val isInstructorInt = when (isInstructor){
-                true -> 1
-                false -> 0
-            }*/
-
             val user = CreateUser(username, password, isInstructor)
 
             if (password == confirmPassword && username.isNotEmpty() && password.isNotEmpty()){

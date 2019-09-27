@@ -25,7 +25,7 @@
             android:name=".ui.Instructor.InstructorActivity"
             android:label="@string/title_activity_instructor" />
         <activity
-            android:name=".ui.ClientActivity"
+            android:name=".ui.client.ClientActivity"
             android:label="@string/title_activity_client" />
         <activity android:name=".ui.WalkthroughActivity" />
         <activity android:name=".ui.LoginActivity">

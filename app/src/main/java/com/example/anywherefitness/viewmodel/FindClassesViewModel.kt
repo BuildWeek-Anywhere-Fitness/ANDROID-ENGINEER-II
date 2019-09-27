@@ -1,4 +1,4 @@
-package com.example.anywherefitness.ui.client
+package com.example.anywherefitness.viewmodel
 
 import android.app.Application
 import android.util.Log
@@ -6,9 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.anywherefitness.Api.UserApiBuilder
-import com.example.anywherefitness.App
 import com.example.anywherefitness.model.FitnessClass
-import com.example.anywherefitness.model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,9 +39,9 @@ class FindClassesViewModel(application: Application) : AndroidViewModel(applicat
         })
     }
 
-     fun getUser(): LiveData<User>?{
+     /*fun getUser(): LiveData<User>?{
          return App.repo?.getUser()
-     }
+     }*/
 
 
 }

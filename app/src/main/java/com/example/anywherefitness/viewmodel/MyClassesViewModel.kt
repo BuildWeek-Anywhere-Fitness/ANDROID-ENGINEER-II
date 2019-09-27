@@ -1,4 +1,4 @@
-package com.example.anywherefitness.ui.client
+package com.example.anywherefitness.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -15,12 +15,8 @@ class MyClassesViewModel(application: Application) : AndroidViewModel(applicatio
     val text: LiveData<String> = _text
     val repo = UserRepo(application)
 
-    //TODO: click listener in adapter will remove class from database, will need to sync with api at somepoint as well
-
     fun getAllClasses(): MutableList<FitnessClass> {
         var instructorFitnessClassList: MutableList<FitnessClass> = repo.getAllFitnessClasss()
         return instructorFitnessClassList
     }
-
-
 }
