@@ -19,6 +19,8 @@ import com.example.anywherefitness.Api.UserApiBuilder
 import com.example.anywherefitness.R
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
+import com.example.anywherefitness.model.User
+import com.example.anywherefitness.ui.LoginActivity
 import kotlinx.android.synthetic.main.fitness_class_list_view.view.*
 import kotlinx.android.synthetic.main.fragment_classes_instructor.*
 import retrofit2.Call
@@ -48,10 +50,17 @@ class InstructorClassesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val saveToken = activity?.getSharedPreferences(LoginActivity.SAVE_TOKEN, Context.MODE_PRIVATE)
+        val getSavedToken = saveToken?.getString(LoginActivity.GET_SAVE_TOKEN, "default")
+
+        var userId = 0
+        val userObserver = Observer<User> {userId = it.id}
+        instructorClassesViewModel.getUser()?.observe(this, userObserver)
+
         //TODO: put this in view model, remove magic number for instructor id
         //calling all classes here and then filtering for the correct instructor_id because when a class is posted it does not
         //return the class_id, so we can't save it in the database correctly
-        UserApiBuilder.userRetro().getAllClasses().enqueue(object: Callback<List<FitnessClass>> {
+        UserApiBuilder.userRetro().getAllClasses(getSavedToken!!).enqueue(object: Callback<List<FitnessClass>> {
             override fun onFailure(call: Call<List<FitnessClass>>, t: Throwable) {
                 Log.i("BIGBRAIN", "onFailure $t")
             }
@@ -62,7 +71,7 @@ class InstructorClassesFragment : Fragment() {
                     instructorClassesViewModel.deleteAllClasses()
                     fitnessClassList = response.body()!!.toMutableList()
                     for (i in 0 until fitnessClassList.size) {
-                        if (fitnessClassList[i].instructor_id == 11) {
+                        if (fitnessClassList[i].instructor_id == userId) {
                             instructorClassesViewModel.insert(fitnessClassList[i])
                         }
                     }
@@ -106,11 +115,15 @@ class InstructorClassesFragment : Fragment() {
             holder.fitnessClassId.text = fitnessClass.id.toString()
             holder.fitnessClassParent.setOnLongClickListener {
 
+
+                val saveToken = activity?.getSharedPreferences(LoginActivity.SAVE_TOKEN, Context.MODE_PRIVATE)
+                val getSavedToken = saveToken?.getString(LoginActivity.GET_SAVE_TOKEN, "default")
+
                 val builder = AlertDialog.Builder(context)
                 builder.setTitle("Delete Class")
                 builder.setMessage("Are you sure you want to delete this class?")
                 builder.setPositiveButton("YES"){dialog, which ->
-                    UserApiBuilder.userRetro().deleteClass(fitnessClass.id).enqueue(object: Callback<Void> {
+                    UserApiBuilder.userRetro().deleteClass(getSavedToken!!, fitnessClass.id).enqueue(object: Callback<Void> {
                         override fun onFailure(call: Call<Void>, t: Throwable) {
                             Log.i("BIGBRAIN", "onFailure $t")
                         }

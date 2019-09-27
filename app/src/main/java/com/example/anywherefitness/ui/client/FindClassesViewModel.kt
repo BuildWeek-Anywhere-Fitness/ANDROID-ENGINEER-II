@@ -1,21 +1,14 @@
 package com.example.anywherefitness.ui.client
 
-import android.app.AlertDialog
 import android.app.Application
-import android.content.Context
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.anywherefitness.Api.UserApiBuilder
-import com.example.anywherefitness.database.UserRepo
+import com.example.anywherefitness.App
 import com.example.anywherefitness.model.FitnessClass
-import com.example.anywherefitness.model.FitnessClassResult
+import com.example.anywherefitness.model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,9 +22,8 @@ class FindClassesViewModel(application: Application) : AndroidViewModel(applicat
 
     var resultList = MutableLiveData<List<FitnessClass>>()
 
-
-    init {
-        UserApiBuilder.userRetro().getAllClasses().enqueue(object: Callback<List<FitnessClass>> {
+    fun getList(token: String){
+        UserApiBuilder.userRetro().getAllClasses(token).enqueue(object: Callback<List<FitnessClass>> {
 
             override fun onFailure(call: Call<List<FitnessClass>>, t: Throwable) {
                 Log.i("DEBUG", t.toString())
@@ -48,6 +40,10 @@ class FindClassesViewModel(application: Application) : AndroidViewModel(applicat
 
         })
     }
+
+     fun getUser(): LiveData<User>?{
+         return App.repo?.getUser()
+     }
 
 
 }
