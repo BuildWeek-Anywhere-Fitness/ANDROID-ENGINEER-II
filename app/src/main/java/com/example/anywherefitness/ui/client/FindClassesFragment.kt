@@ -95,10 +95,7 @@ class FindClassesFragment : Fragment() {
             }
 
         })
-
-        btn_search_classes.setOnClickListener {
-
-        }
+        
 
 
 
