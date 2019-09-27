@@ -1,9 +1,18 @@
 package com.example.anywherefitness.viewmodel
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.content.edit
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.anywherefitness.Api.UserApiBuilder
+import com.example.anywherefitness.App
 import com.example.anywherefitness.model.User
+import com.example.anywherefitness.ui.LoginActivity
+import com.example.anywherefitness.ui.StartUpActivity
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,13 +58,20 @@ class LoginViewModel : ViewModel(){
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful){
                     currentUser.value = response.body()
-                } else {
-                    currentUser.value = null
-                }
+                } else currentUser.value = null
             }
 
         })
     }
+
+    fun setUser(user: User){
+        App.repo?.setUser(user)
+    }
+
+    fun getUser(): LiveData<User>?{
+        return App.repo?.getUser()
+    }
+
 
 
 }

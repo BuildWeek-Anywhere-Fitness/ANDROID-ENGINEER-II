@@ -1,5 +1,6 @@
 package com.example.anywherefitness.ui.Instructor
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,7 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.anywherefitness.Api.UserApiBuilder
 import com.example.anywherefitness.R
-import com.example.anywherefitness.model.FitnessClass
+import com.example.anywherefitness.model.User
+import com.example.anywherefitness.ui.LoginActivity
 import kotlinx.android.synthetic.main.fragment_create_class_instructor.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,6 +41,9 @@ class CreateClassesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var userId = 0
+        val userObserver = Observer<User> {userId = it.id}
+        createClassViewModel.getUser()?.observe(this, userObserver)
 
         btn_save_class.setOnClickListener{
             val newClass = createClassViewModel.createClass(
@@ -54,21 +59,25 @@ class CreateClassesFragment : Fragment() {
             //TODO: put this in view model
             //TODO: figure out how to get class_Id back
             //TODO: get instructor_id programmatically
+            println(userId)
             //will either need to update in the my classes fragment, or figure out something here
             val newCreateClass = CreateFitnessClass(newClass.name!!, newClass.type!!, newClass.location!!, newClass.duration!!, newClass.intensity!!,
-                newClass.max_size.toString(), newClass.starttime, 11, null)
+                newClass.max_size.toString(), newClass.starttime, userId, null)
 
-            UserApiBuilder.userRetro().addClass(newCreateClass).enqueue(object: Callback<CreateFitnessClass> {
-                override fun onFailure(call: Call<CreateFitnessClass>, t: Throwable) {
+            val saveToken = activity?.getSharedPreferences(LoginActivity.SAVE_TOKEN, Context.MODE_PRIVATE)
+            val getSavedToken = saveToken?.getString(LoginActivity.GET_SAVE_TOKEN, "default")
+
+            UserApiBuilder.userRetro().addClass(getSavedToken!!, newCreateClass).enqueue(object: Callback<Void> {
+                override fun onFailure(call: Call<Void>, t: Throwable) {
                     Toast.makeText(context, "onFailure Failed to create class", Toast.LENGTH_LONG).show()
                     Log.i("BIGBRAIN", "onFailure $t")
                 }
 
-                override fun onResponse(call: Call<CreateFitnessClass>, response: Response<CreateFitnessClass>) {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful) {
                         //createClassViewModel.insert(newClass)
                         Toast.makeText(context, "new class created ${newClass.name}", Toast.LENGTH_LONG).show()
-                        Log.i("BIGBRAIN", "success ${response.body()?.id}")
+                        Log.i("BIGBRAIN", "success ${response.body()}")
                     } else {
                         Toast.makeText(context, "onResponse failed to create class", Toast.LENGTH_LONG).show()
                         Log.i("BIGBRAIN", "onFailure $response")

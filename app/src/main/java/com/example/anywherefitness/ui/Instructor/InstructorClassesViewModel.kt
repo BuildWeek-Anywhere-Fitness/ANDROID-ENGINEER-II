@@ -6,8 +6,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.anywherefitness.Api.UserApiBuilder
+import com.example.anywherefitness.App
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
+import com.example.anywherefitness.model.User
 import kotlinx.android.synthetic.main.fragment_classes_instructor.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,7 +28,7 @@ class InstructorClassesViewModel(application: Application) : AndroidViewModel(ap
     val text: LiveData<String> = _text
 
     fun delete(fitnessClass: FitnessClass) {
-        repo.delete(fitnessClass)
+        App.repo?.delete(fitnessClass)
     }
 
     fun deleteClassById(classId: Int) {
@@ -74,7 +76,11 @@ class InstructorClassesViewModel(application: Application) : AndroidViewModel(ap
     }*/
 
     fun getAllClasses(): MutableList<FitnessClass> {
-        var instructorFitnessClassList: MutableList<FitnessClass> = repo.getAllFitnessClasss()
+        val instructorFitnessClassList: MutableList<FitnessClass> = repo.getAllFitnessClasss()
         return instructorFitnessClassList
+    }
+
+    fun getUser(): LiveData<User>?{
+        return App.repo?.getUser()
     }
 }

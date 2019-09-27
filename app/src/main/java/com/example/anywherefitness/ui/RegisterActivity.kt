@@ -41,6 +41,10 @@ class RegisterActivity : AppCompatActivity() {
             val password = et_register_password.text.toString()
             val confirmPassword = et_confirm_password.text.toString()
             val isInstructor = checkbox_instructor.isChecked
+            val isInstructorInt = when (isInstructor){
+                true -> 1
+                false -> 0
+            }
 
             val user = CreateUser(username, password, isInstructor)
 

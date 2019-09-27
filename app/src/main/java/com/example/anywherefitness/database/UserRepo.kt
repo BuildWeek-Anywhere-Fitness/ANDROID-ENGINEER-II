@@ -2,12 +2,25 @@ package com.example.anywherefitness.database
 
 import android.content.Context
 import android.os.AsyncTask
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.anywherefitness.model.FitnessClass
+import com.example.anywherefitness.model.User
 
 class UserRepo (context: Context) {
 
     private var userDao: UserDao
     lateinit var fitnessClassList: MutableList<FitnessClass>
+
+    private  var userLiveData = MutableLiveData<User>()
+
+    fun getUser(): LiveData<User> {
+        return userLiveData
+    }
+
+    fun setUser(user: User){
+        userLiveData.value = user
+    }
 
     init {
         val database: UserDatabase = UserDatabase.getInstance(context)!!

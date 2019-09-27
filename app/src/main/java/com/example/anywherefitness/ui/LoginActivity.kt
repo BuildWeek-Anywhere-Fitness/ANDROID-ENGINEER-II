@@ -12,14 +12,15 @@ import com.example.anywherefitness.viewmodel.LoginViewModel
 import com.example.anywherefitness.R
 import com.example.anywherefitness.model.User
 import com.example.anywherefitness.ui.Instructor.InstructorActivity
-import com.example.anywherefitness.ui.StartUpActivity.Companion.GET_SAVE_TOKEN
-import com.example.anywherefitness.ui.StartUpActivity.Companion.REGISTER_CODE
-import com.example.anywherefitness.ui.StartUpActivity.Companion.SAVE_TOKEN
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
-
+    companion object {
+        val REGISTER_CODE = 210
+        val SAVE_TOKEN = "saved preference98699768798799608088086989869"
+        val GET_SAVE_TOKEN = "token"
+    }
 
 
 
@@ -27,7 +28,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -48,7 +48,6 @@ class LoginActivity : AppCompatActivity() {
 
         val userObserver = Observer<User> {
             val intent = Intent(this, WalkthroughActivity::class.java)
-            intent.putExtra(StartUpActivity.USER, it)
             startActivity(intent)
             finish()
         }

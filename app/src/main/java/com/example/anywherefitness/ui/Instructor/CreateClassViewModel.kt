@@ -8,8 +8,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.anywherefitness.App
 import com.example.anywherefitness.database.UserRepo
 import com.example.anywherefitness.model.FitnessClass
+import com.example.anywherefitness.model.User
 
 class CreateClassViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -62,6 +64,11 @@ class CreateClassViewModel(application: Application) : AndroidViewModel(applicat
     fun saveClass(newClass: FitnessClass) {
         //make appropriate db calls and ui updates here
     }
+
+    fun getUser(): LiveData<User>?{
+        return App.repo?.getUser()
+    }
+
 }
 
 class CreateFitnessClass (
