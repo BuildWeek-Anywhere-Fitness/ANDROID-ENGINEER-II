@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.content.edit
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -43,6 +44,8 @@ class LoginActivity : AppCompatActivity() {
                     this.commit()
                 }
                 loginModel.getCurrentUser(it)
+            } else{
+                Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show()
             }
         }
 
